@@ -1,0 +1,144 @@
+
+buildscript {
+    repositories {
+        maven { url = 'https://maven.minecraftforge.net' }
+        maven { url = 'https://repo.spongepowered.org/repository/maven-public' }
+        maven { url = 'https://maven.outlands.top/releases' }
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '6.10.+', changing: true
+        //classpath "org.spongepowered:mixingradle:0.7.+"
+    }
+}
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'eclipse'
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+//apply plugin: 'org.spongepowered.mixin'
+
+version = "${mod_version}"
+group = mod_base_package
+archivesBaseName = mod_id
+
+
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+minecraft {
+
+    mappings channel: mappings_channel, version: mappings_version
+
+    // accessTransformer = file('src/main/resources/META-INF/accesstransformer.cfg')
+
+    legacy {
+        fixClasspath = true
+        extractMappings = true
+        attachMappings = true
+    }
+
+    runs {
+        client {
+            workingDirectory project.file('run/client')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+        }
+
+        server {
+            workingDirectory project.file('run/server')
+
+            property 'forge.logging.markers', 'REGISTRIES'
+            property 'forge.logging.console.level', 'debug'
+
+            mods {
+                "${mod_id}" {
+                    source sourceSets.main
+                }
+            }
+        }
+    }
+}
+
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/generated/resources'
+        }
+    }
+}
+
+//mixin {add sourceSets.main, mod_id + ".mixins.refmap.json"}
+repositories {
+    maven {
+        name 'Cleanroom Maven'
+        url 'https://maven.cleanroommc.com/'
+    }
+    maven {
+        url "https://repo.cleanroommc.com/snapshots"
+    }
+    maven {
+        url "https://maven.outlands.top/releases/"
+    }
+
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.cleanroommc:cleanroom:${cleanroom_version}"
+    /*
+    annotationProcessor 'org.ow2.asm:asm:9.6'
+    annotationProcessor 'com.google.guava:guava:33.0.0-jre'
+    annotationProcessor 'com.google.code.gson:gson:2.10.1'
+
+    annotationProcessor ('com.cleanroommc:sponge-mixin:0.18.5+mixin.0.8.5')
+    */
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
+
+jar {
+    manifest {
+        attributes([
+                'Specification-Title': mod_id,
+                'Specification-Vendor': mod_authors,
+                'Specification-Version': '1', // We are version 1 of ourselves
+                //'FMLCorePluginContainsFMLMod': true,
+                //'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
+                //'FMLCorePlugin': '',
+                //'ForceLoadAsMod': true
+                //'FMLAT': '',
+                'Implementation-Title': project.name,
+                'Implementation-Version': mod_version,
+                'Implementation-Vendor': mod_authors,
+                'Implementation-Timestamp': new Date().format('yyyy-MM-dd\'T\'HH:mm:ssZ')
+        ])
+    }
+}
+
+jar.finalizedBy('reobfJar')
+
+publishing {
+    repositories {
+        maven {
+            name = "outlands"
+            url = "https://maven.outlands.top/releases"
+            credentials(PasswordCredentials)
+            authentication {
+                basic(BasicAuthentication)
+            }
+        }
+    }
+    publications {
+        maven(MavenPublication) {
+            groupId = "com.cleanroommc"
+            artifactId = "lwjglxx"
+            version = mod_version
+            from components.java
+        }
+    }
+}
