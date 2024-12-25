@@ -19,7 +19,8 @@ import org.lwjglx.opengl.Display;
 public class Sys {
 
     static {
-        if (ForgeEarlyConfig.FORCE_WAYLAND && GLFW.glfwPlatformSupported(GLFW.GLFW_PLATFORM_WAYLAND)) {
+        if (GLFW.glfwPlatformSupported(GLFW.GLFW_PLATFORM_WAYLAND)) {
+            FMLLog.log.info("Wayland support detected, will try to boot in wayland mode");
             GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_WAYLAND);
         }
         if (Platform.get() == Platform.MACOSX) {
