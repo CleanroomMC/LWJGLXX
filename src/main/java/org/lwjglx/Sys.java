@@ -24,8 +24,7 @@ public class Sys {
             GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_WAYLAND);
         }
         if (Platform.get() == Platform.MACOSX) {
-            FMLLog.log.info("MACOS detected, using glfw_async");
-            Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
+            FMLLog.log.info("MacOS detected");
             Configuration.GLFW_CHECK_THREAD0.set(false);
             Toolkit.getDefaultToolkit();
         }
