@@ -19,14 +19,15 @@ import org.lwjglx.opengl.Display;
 public class Sys {
 
     static {
-        if (GLFW.glfwPlatformSupported(GLFW.GLFW_PLATFORM_WAYLAND)) {
-            FMLLog.log.info("Wayland support detected, will try to boot in wayland mode");
-            GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_WAYLAND);
-        }
         if (Platform.get() == Platform.MACOSX) {
             FMLLog.log.info("MacOS detected");
             Configuration.GLFW_CHECK_THREAD0.set(false);
+            Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
             Toolkit.getDefaultToolkit();
+        }
+        if (GLFW.glfwPlatformSupported(GLFW.GLFW_PLATFORM_WAYLAND)) {
+            FMLLog.log.info("Wayland support detected, will try to boot in wayland mode");
+            GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_WAYLAND);
         }
         if (!glfwInit()) {
             throw new IllegalStateException("Unable to initialize glfw");
