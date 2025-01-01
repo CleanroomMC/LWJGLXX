@@ -8,8 +8,6 @@ import java.net.URI;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
-import net.minecraftforge.common.ForgeEarlyConfig;
-import net.minecraftforge.fml.common.FMLLog;
 import org.lwjgl3.Version;
 import org.lwjgl3.glfw.GLFW;
 import org.lwjgl3.system.Configuration;
@@ -20,13 +18,11 @@ public class Sys {
 
     static {
         if (Platform.get() == Platform.MACOSX) {
-            FMLLog.log.info("MacOS detected");
             Configuration.GLFW_CHECK_THREAD0.set(false);
             Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
             Toolkit.getDefaultToolkit();
         }
         if (GLFW.glfwPlatformSupported(GLFW.GLFW_PLATFORM_WAYLAND)) {
-            FMLLog.log.info("Wayland support detected, will try to boot in wayland mode");
             GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_WAYLAND);
         }
         if (!glfwInit()) {
