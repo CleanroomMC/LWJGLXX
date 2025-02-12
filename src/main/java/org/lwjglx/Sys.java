@@ -10,8 +10,7 @@ import javax.swing.UIManager;
 
 import org.lwjgl3.Version;
 import org.lwjgl3.glfw.GLFW;
-import org.lwjgl3.system.Configuration;
-import org.lwjgl3.system.Platform;
+import org.lwjgl3.system.*;
 import org.lwjglx.opengl.Display;
 
 public class Sys {
