@@ -360,7 +360,7 @@ public class Display {
         GL.createCapabilities();
 
         String vendor = org.lwjgl3.opengl.GL11.glGetString(GL11.GL_VENDOR);
-        if (vendor != null && vendor.startsWith("NVIDIA")) {
+        if (vendor != null && vendor.startsWith("NVIDIA") && GLFW.glfwPlatformSupported(GLFW_PLATFORM_WAYLAND)) {
             try {
                 SharedLibrary LIBRARY = APIUtil.apiCreateLibrary("libc.so.6");
                 long PFN_setenv = APIUtil.apiGetFunctionAddress(LIBRARY, "setenv");
