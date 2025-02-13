@@ -13,6 +13,7 @@ import org.lwjgl3.opengl.GL;
 import org.lwjgl3.opengl.GL11;
 import org.lwjglx.BufferUtils;
 import org.lwjglx.Sys;
+import oshi.SystemInfo;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
@@ -152,6 +153,15 @@ public class Display {
         if (ForgeEarlyConfig.WINDOW_CENTERED) {
             glfwWindowHint(GLFW_POSITION_X, (desktopDisplayMode.getWidth() - mode.getWidth()) / 2);
             glfwWindowHint(GLFW_POSITION_Y, (desktopDisplayMode.getHeight() - mode.getHeight()) / 2);
+        }
+
+        SystemInfo si = new SystemInfo();
+        if (si.getHardware().getGraphicsCards().stream().anyMatch(graphicsCard -> graphicsCard.getVendor().equals("NVIDIA")) && GLFW.glfwPlatformSupported(GLFW_PLATFORM_WAYLAND)) {
+            if (Platform.isLinux()) {
+                com.sun.jna.platform.linux.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
+            } else {
+                com.sun.jna.platform.unix.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
+            }
         }
 
         Window.handle = glfwCreateWindow(mode.getWidth(), mode.getHeight(), windowTitle, NULL, NULL);
@@ -354,15 +364,6 @@ public class Display {
         glfwMakeContextCurrent(Window.handle);
         drawable = new DrawableGL();
         GL.createCapabilities();
-
-        String vendor = org.lwjgl3.opengl.GL11.glGetString(GL11.GL_VENDOR);
-        if (vendor != null && vendor.toUpperCase().startsWith("NVIDIA") && GLFW.glfwPlatformSupported(GLFW_PLATFORM_WAYLAND)) {
-            if (Platform.isLinux()) {
-                com.sun.jna.platform.linux.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
-            } else {
-                com.sun.jna.platform.unix.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
-            }
-        }
 
         if (savedIcons != null) {
             setIcon(savedIcons);

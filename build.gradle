@@ -48,6 +48,7 @@ dependencies {
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
     compileOnly 'net.java.dev.jna:jna:5.16.0'
     compileOnly 'net.java.dev.jna:jna-platform:5.16.0'
+    compileOnly 'com.github.oshi:oshi-core:6.6.6'
 
 
 
