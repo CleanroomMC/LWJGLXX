@@ -1,13 +1,9 @@
 package org.lwjglx.opengl;
 
+import com.sun.jna.Platform;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.ForgeEarlyConfig;
-import org.lwjgl3.system.APIUtil;
-import org.lwjgl3.system.JNI;
-import org.lwjgl3.system.MemoryStack;
-import org.lwjgl3.system.SharedLibrary;
 import org.lwjglx.LWJGLException;
-import org.lwjglx.LWJGLUtil;
 import org.lwjglx.input.*;
 import org.lwjglx.util.Rectangle;
 import org.lwjgl3.PointerBuffer;
@@ -360,17 +356,11 @@ public class Display {
         GL.createCapabilities();
 
         String vendor = org.lwjgl3.opengl.GL11.glGetString(GL11.GL_VENDOR);
-        if (vendor != null && vendor.startsWith("NVIDIA") && GLFW.glfwPlatformSupported(GLFW_PLATFORM_WAYLAND)) {
-            try {
-                SharedLibrary LIBRARY = APIUtil.apiCreateLibrary("libc.so.6");
-                long PFN_setenv = APIUtil.apiGetFunctionAddress(LIBRARY, "setenv");
-                try (var stack = MemoryStack.stackPush()) {
-                    var nameBuf = stack.UTF8("__GL_THREADED_OPTIMIZATIONS");
-                    var valueBuf = stack.UTF8("0");
-                    JNI.callPPI(org.lwjgl3.system.MemoryUtil.memAddress(nameBuf), org.lwjgl3.system.MemoryUtil.memAddressSafe(valueBuf), 1 /* replace */, PFN_setenv);
-                }
-            } catch (Exception e) {
-                LWJGLUtil.log(e.toString());
+        if (vendor != null && vendor.toUpperCase().startsWith("NVIDIA") && GLFW.glfwPlatformSupported(GLFW_PLATFORM_WAYLAND)) {
+            if (Platform.isLinux()) {
+                com.sun.jna.platform.linux.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
+            } else {
+                com.sun.jna.platform.unix.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
             }
         }
 
