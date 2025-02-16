@@ -8,6 +8,7 @@ import java.net.URI;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
+import net.minecraftforge.common.ForgeEarlyConfig;
 import org.lwjgl3.Version;
 import org.lwjgl3.glfw.GLFW;
 import org.lwjgl3.system.*;
@@ -22,7 +23,11 @@ public class Sys {
             Toolkit.getDefaultToolkit();
         }
         if (GLFW.glfwPlatformSupported(GLFW.GLFW_PLATFORM_WAYLAND)) {
-            GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_WAYLAND);
+            if (ForgeEarlyConfig.FORCE_X11) {
+                GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_X11);
+            } else {
+                GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_WAYLAND);
+            }
         }
         if (!glfwInit()) {
             throw new IllegalStateException("Unable to initialize glfw");
