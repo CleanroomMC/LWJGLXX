@@ -157,12 +157,8 @@ public class Display {
 
         if (org.lwjgl3.system.Platform.get() == org.lwjgl3.system.Platform.LINUX || org.lwjgl3.system.Platform.get() == org.lwjgl3.system.Platform.FREEBSD){
             SystemInfo si = new SystemInfo();
-            if (si.getHardware().getGraphicsCards().stream().anyMatch(graphicsCard -> graphicsCard.getVendor().equals("NVIDIA")) && GLFW.glfwPlatformSupported(GLFW_PLATFORM_WAYLAND)) {
-                if (Platform.isLinux()) {
-                    com.sun.jna.platform.linux.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
-                } else {
-                    com.sun.jna.platform.unix.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
-                }
+            if (si.getHardware().getGraphicsCards().stream().anyMatch(graphicsCard -> graphicsCard.getVendor().equals("NVIDIA"))) {
+                com.sun.jna.platform.unix.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
             }
         }
 
