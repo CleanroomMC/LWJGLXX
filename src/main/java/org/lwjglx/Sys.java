@@ -4,6 +4,7 @@ import static org.lwjgl3.glfw.GLFW.glfwInit;
 
 import java.awt.*;
 import java.net.URI;
+import java.util.Objects;
 
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -22,7 +23,7 @@ public class Sys {
             Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
             Toolkit.getDefaultToolkit();
         }
-        if (GLFW.glfwPlatformSupported(GLFW.GLFW_PLATFORM_WAYLAND)) {
+        if (Objects.requireNonNullElse(System.getenv("XDG_SESSION_TYPE"),"").toLowerCase().startsWith("wayland")) {
             if (ForgeEarlyConfig.FORCE_X11) {
                 GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_X11);
             } else {
