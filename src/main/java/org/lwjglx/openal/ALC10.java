@@ -13,6 +13,9 @@ public class ALC10 {
 
     public static int alcGetError(ALCdevice device) {
         if (device == null) {
+            if (AL.alcDevice == null) {
+                return org.lwjgl3.openal.ALC10.alcGetError(0);
+            }
             return org.lwjgl3.openal.ALC10.alcGetError(AL.alcDevice.device);
         }
 
@@ -21,6 +24,9 @@ public class ALC10 {
 
     public static java.lang.String alcGetString(ALCdevice device, int pname) {
         if (device == null) {
+            if (AL.alcDevice == null) {
+                return org.lwjgl3.openal.ALC10.alcGetString(0, pname);
+            }
             return org.lwjgl3.openal.ALC10.alcGetString(AL.alcDevice.device, pname);
         }
 
@@ -37,6 +43,9 @@ public class ALC10 {
 
     public static boolean alcIsExtensionPresent(ALCdevice device, java.lang.String extName) {
         if (device == null) {
+            if (AL.alcDevice == null) {
+                return org.lwjgl3.openal.ALC10.alcIsExtensionPresent(0, extName);
+            }
             return org.lwjgl3.openal.ALC10.alcIsExtensionPresent(AL.alcDevice.device, extName);
         }
 
