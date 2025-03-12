@@ -370,11 +370,11 @@ public class Display {
 
         glfwSwapInterval(1);
 
-        displayCreated = true;
-
         if (startFullscreen) {
             setFullscreen(true);
         }
+
+        displayCreated = true;
 
         int[] x = new int[1], y = new int[1];
         GLFW.glfwGetWindowSize(Window.handle, x, y);
@@ -664,8 +664,10 @@ public class Display {
                     vidMode.width(),
                     vidMode.height(),
                     vidMode.refreshRate());
-            Minecraft.func_71410_x()
-                    .func_71370_a(vidMode.width(), vidMode.height());
+            if (displayCreated) {
+                Minecraft.func_71410_x()
+                        .func_71370_a(vidMode.width(), vidMode.height());
+            }
         } else {
             glfwSetWindowSize(window, savedW[0], savedH[0]);
             glfwSetWindowMonitor(window, NULL, savedX[0], savedY[0], savedW[0], savedH[0], 0);

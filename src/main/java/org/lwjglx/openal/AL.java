@@ -12,8 +12,8 @@ import org.lwjglx.Sys;
 
 public class AL {
 
-    static ALCdevice alcDevice;
-    static ALCcontext alcContext;
+    static volatile ALCdevice alcDevice;
+    static volatile ALCcontext alcContext;
 
     private static boolean created = false;
 
