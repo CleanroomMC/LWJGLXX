@@ -11,38 +11,38 @@ public class NVVertexArrayRange {
     public static final int GL_VERTEX_ARRAY_RANGE_VALID_NV = (int) 34079;
 
     public static void glFlushVertexArrayRangeNV() {
-        org.lwjgl3.opengl.NVVertexArrayRange.glFlushVertexArrayRangeNV();
+        org.lwjgl.opengl.NVVertexArrayRange.glFlushVertexArrayRangeNV();
     }
 
     public static void glVertexArrayRangeNV(java.nio.ByteBuffer pPointer) {
-        org.lwjgl3.opengl.NVVertexArrayRange.glVertexArrayRangeNV(pPointer);
+        org.lwjgl.opengl.NVVertexArrayRange.glVertexArrayRangeNV(pPointer);
     }
 
     public static void glVertexArrayRangeNV(java.nio.DoubleBuffer pPointer) {
         final java.nio.ByteBuffer wrappedArg0 = BufferCasts.toByteBuffer(pPointer);
 
-        org.lwjgl3.opengl.NVVertexArrayRange.glVertexArrayRangeNV(wrappedArg0);
+        org.lwjgl.opengl.NVVertexArrayRange.glVertexArrayRangeNV(wrappedArg0);
         BufferCasts.updateBuffer(pPointer, wrappedArg0);
     }
 
     public static void glVertexArrayRangeNV(java.nio.FloatBuffer pPointer) {
         final java.nio.ByteBuffer wrappedArg0 = BufferCasts.toByteBuffer(pPointer);
 
-        org.lwjgl3.opengl.NVVertexArrayRange.glVertexArrayRangeNV(wrappedArg0);
+        org.lwjgl.opengl.NVVertexArrayRange.glVertexArrayRangeNV(wrappedArg0);
         BufferCasts.updateBuffer(pPointer, wrappedArg0);
     }
 
     public static void glVertexArrayRangeNV(java.nio.IntBuffer pPointer) {
         final java.nio.ByteBuffer wrappedArg0 = BufferCasts.toByteBuffer(pPointer);
 
-        org.lwjgl3.opengl.NVVertexArrayRange.glVertexArrayRangeNV(wrappedArg0);
+        org.lwjgl.opengl.NVVertexArrayRange.glVertexArrayRangeNV(wrappedArg0);
         BufferCasts.updateBuffer(pPointer, wrappedArg0);
     }
 
     public static void glVertexArrayRangeNV(java.nio.ShortBuffer pPointer) {
         final java.nio.ByteBuffer wrappedArg0 = BufferCasts.toByteBuffer(pPointer);
 
-        org.lwjgl3.opengl.NVVertexArrayRange.glVertexArrayRangeNV(wrappedArg0);
+        org.lwjgl.opengl.NVVertexArrayRange.glVertexArrayRangeNV(wrappedArg0);
         BufferCasts.updateBuffer(pPointer, wrappedArg0);
     }
 }

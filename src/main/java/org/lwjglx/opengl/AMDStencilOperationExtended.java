@@ -8,6 +8,6 @@ public class AMDStencilOperationExtended {
     public static final int GL_STENCIL_OP_VALUE_AMD = (int) 34636;
 
     public static void glStencilOpValueAMD(int face, int value) {
-        org.lwjgl3.opengl.AMDStencilOperationExtended.glStencilOpValueAMD(face, value);
+        org.lwjgl.opengl.AMDStencilOperationExtended.glStencilOpValueAMD(face, value);
     }
 }

@@ -13,6 +13,6 @@ public class ARBMultisample {
     public static final int GL_SAMPLE_COVERAGE_VALUE_ARB = (int) 32938;
 
     public static void glSampleCoverageARB(float value, boolean invert) {
-        org.lwjgl3.opengl.ARBMultisample.glSampleCoverageARB(value, invert);
+        org.lwjgl.opengl.ARBMultisample.glSampleCoverageARB(value, invert);
     }
 }

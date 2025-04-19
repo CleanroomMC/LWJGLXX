@@ -13,18 +13,18 @@ public class ARBFramebufferNoAttachments {
     public static final int GL_MAX_FRAMEBUFFER_WIDTH = (int) 37653;
 
     public static void glFramebufferParameteri(int target, int pname, int param) {
-        org.lwjgl3.opengl.ARBFramebufferNoAttachments.glFramebufferParameteri(target, pname, param);
+        org.lwjgl.opengl.ARBFramebufferNoAttachments.glFramebufferParameteri(target, pname, param);
     }
 
     public static int glGetFramebufferParameteri(int target, int pname) {
-        return org.lwjgl3.opengl.ARBFramebufferNoAttachments.glGetFramebufferParameteri(target, pname);
+        return org.lwjgl.opengl.ARBFramebufferNoAttachments.glGetFramebufferParameteri(target, pname);
     }
 
     public static void glGetNamedFramebufferParameterEXT(int framebuffer, int pname, java.nio.IntBuffer params) {
-        org.lwjgl3.opengl.ARBFramebufferNoAttachments.glGetNamedFramebufferParameterivEXT(framebuffer, pname, params);
+        org.lwjgl.opengl.ARBFramebufferNoAttachments.glGetNamedFramebufferParameterivEXT(framebuffer, pname, params);
     }
 
     public static void glNamedFramebufferParameteriEXT(int framebuffer, int pname, int param) {
-        org.lwjgl3.opengl.ARBFramebufferNoAttachments.glNamedFramebufferParameteriEXT(framebuffer, pname, param);
+        org.lwjgl.opengl.ARBFramebufferNoAttachments.glNamedFramebufferParameteriEXT(framebuffer, pname, param);
     }
 }

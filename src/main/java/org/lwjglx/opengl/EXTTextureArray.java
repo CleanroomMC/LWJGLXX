@@ -17,6 +17,6 @@ public class EXTTextureArray {
     public static final int GL_TEXTURE_BINDING_2D_ARRAY_EXT = (int) 35869;
 
     public static void glFramebufferTextureLayerEXT(int target, int attachment, int texture, int level, int layer) {
-        org.lwjgl3.opengl.EXTTextureArray.glFramebufferTextureLayerEXT(target, attachment, texture, level, layer);
+        org.lwjgl.opengl.EXTTextureArray.glFramebufferTextureLayerEXT(target, attachment, texture, level, layer);
     }
 }

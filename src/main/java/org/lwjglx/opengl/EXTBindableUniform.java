@@ -10,14 +10,14 @@ public class EXTBindableUniform {
     public static final int GL_UNIFORM_BUFFER_EXT = (int) 36334;
 
     public static int glGetUniformBufferSizeEXT(int program, int location) {
-        return org.lwjgl3.opengl.EXTBindableUniform.glGetUniformBufferSizeEXT(program, location);
+        return org.lwjgl.opengl.EXTBindableUniform.glGetUniformBufferSizeEXT(program, location);
     }
 
     public static long glGetUniformOffsetEXT(int program, int location) {
-        return org.lwjgl3.opengl.EXTBindableUniform.glGetUniformOffsetEXT(program, location);
+        return org.lwjgl.opengl.EXTBindableUniform.glGetUniformOffsetEXT(program, location);
     }
 
     public static void glUniformBufferEXT(int program, int location, int buffer) {
-        org.lwjgl3.opengl.EXTBindableUniform.glUniformBufferEXT(program, location, buffer);
+        org.lwjgl.opengl.EXTBindableUniform.glUniformBufferEXT(program, location, buffer);
     }
 }

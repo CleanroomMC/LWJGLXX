@@ -18,20 +18,20 @@ public class AMDDebugOutput {
     public static final int GL_MAX_DEBUG_MESSAGE_LENGTH_AMD = (int) 37187;
 
     public static void glDebugMessageEnableAMD(int category, int severity, java.nio.IntBuffer ids, boolean enabled) {
-        org.lwjgl3.opengl.AMDDebugOutput.glDebugMessageEnableAMD(category, severity, ids, enabled);
+        org.lwjgl.opengl.AMDDebugOutput.glDebugMessageEnableAMD(category, severity, ids, enabled);
     }
 
     public static void glDebugMessageInsertAMD(int category, int severity, int id, java.lang.CharSequence buf) {
-        org.lwjgl3.opengl.AMDDebugOutput.glDebugMessageInsertAMD(category, severity, id, buf);
+        org.lwjgl.opengl.AMDDebugOutput.glDebugMessageInsertAMD(category, severity, id, buf);
     }
 
     public static void glDebugMessageInsertAMD(int category, int severity, int id, java.nio.ByteBuffer buf) {
-        org.lwjgl3.opengl.AMDDebugOutput.glDebugMessageInsertAMD(category, severity, id, buf);
+        org.lwjgl.opengl.AMDDebugOutput.glDebugMessageInsertAMD(category, severity, id, buf);
     }
 
     public static int glGetDebugMessageLogAMD(int count, java.nio.IntBuffer categories, java.nio.IntBuffer severities,
             java.nio.IntBuffer ids, java.nio.IntBuffer lengths, java.nio.ByteBuffer messageLog) {
-        return org.lwjgl3.opengl.AMDDebugOutput
+        return org.lwjgl.opengl.AMDDebugOutput
                 .glGetDebugMessageLogAMD(count, categories, severities, ids, lengths, messageLog);
     }
 }

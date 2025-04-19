@@ -23,7 +23,7 @@ import org.lwjglx.LWJGLException;
 
 /**
  * A Drawable implementation that shares its context with another Drawable. This is useful for background loading of
- * resources. See org.lwjgl3.test.opengl.multithread.BackgroundLoad for an example.
+ * resources. See org.lwjgl.test.opengl.multithread.BackgroundLoad for an example.
  *
  * @author Spasi
  */

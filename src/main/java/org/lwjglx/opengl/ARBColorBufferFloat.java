@@ -12,6 +12,6 @@ public class ARBColorBufferFloat {
     public static final int WGL_TYPE_RGBA_FLOAT_ARB = (int) 8608;
 
     public static void glClampColorARB(int target, int clamp) {
-        org.lwjgl3.opengl.ARBColorBufferFloat.glClampColorARB(target, clamp);
+        org.lwjgl.opengl.ARBColorBufferFloat.glClampColorARB(target, clamp);
     }
 }

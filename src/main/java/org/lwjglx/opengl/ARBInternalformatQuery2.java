@@ -113,6 +113,6 @@ public class ARBInternalformatQuery2 {
     public static final int GL_VIEW_COMPATIBILITY_CLASS = (int) 33462;
 
     public static long glGetInternalformati64(int target, int internalformat, int pname) {
-        return org.lwjgl3.opengl.ARBInternalformatQuery2.glGetInternalformati64(target, internalformat, pname);
+        return org.lwjgl.opengl.ARBInternalformatQuery2.glGetInternalformati64(target, internalformat, pname);
     }
 }

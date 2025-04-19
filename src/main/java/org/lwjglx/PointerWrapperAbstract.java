@@ -40,7 +40,7 @@ public abstract class PointerWrapperAbstract implements PointerWrapper {
 
     /**
      * Checks if the pointer is valid and throws an IllegalStateException if it is not. This method is a NO-OP, unless
-     * the org.lwjgl3.util.Debug property has been set to true.
+     * the org.lwjgl.util.Debug property has been set to true.
      */
     public final void checkValid() {
         if (LWJGLUtil.DEBUG && !isValid())

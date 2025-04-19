@@ -8,10 +8,10 @@ public class NVConditionalRender {
     public static final int GL_QUERY_WAIT_NV = (int) 36371;
 
     public static void glBeginConditionalRenderNV(int id, int mode) {
-        org.lwjgl3.opengl.NVConditionalRender.glBeginConditionalRenderNV(id, mode);
+        org.lwjgl.opengl.NVConditionalRender.glBeginConditionalRenderNV(id, mode);
     }
 
     public static void glEndConditionalRenderNV() {
-        org.lwjgl3.opengl.NVConditionalRender.glEndConditionalRenderNV();
+        org.lwjgl.opengl.NVConditionalRender.glEndConditionalRenderNV();
     }
 }

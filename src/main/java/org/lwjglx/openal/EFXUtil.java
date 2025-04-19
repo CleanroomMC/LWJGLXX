@@ -3,10 +3,10 @@
  */
 package org.lwjglx.openal;
 
-import static org.lwjgl3.openal.AL10.*;
-import static org.lwjgl3.openal.EXTEfx.*;
+import static org.lwjgl.openal.AL10.*;
+import static org.lwjgl.openal.EXTEfx.*;
 
-import org.lwjgl3.openal.ALC;
+import org.lwjgl.openal.ALC;
 
 /**
  * Utility class for the OpenAL extension AL_EXT_EFX. Provides functions to check for the extension and support of
@@ -31,7 +31,7 @@ public final class EFXUtil {
      *
      * @return True if AL_EXT_EFX is supported, false if not.
      *
-     * @throws org.lwjgl3.openal.OpenALException If OpenAL has not been created yet.
+     * @throws org.lwjgl.openal.OpenALException If OpenAL has not been created yet.
      */
     public static boolean isEfxSupported() {
         return ALC.getCapabilities().ALC_EXT_EFX;
@@ -45,7 +45,7 @@ public final class EFXUtil {
      *
      * @return True if it is supported, false if not.
      *
-     * @throws org.lwjgl3.openal.OpenALException If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has not
+     * @throws org.lwjgl.openal.OpenALException If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has not
      *                                          been created yet.
      * @throws IllegalArgumentException         effectType is not a valid effect type.
      */
@@ -82,7 +82,7 @@ public final class EFXUtil {
      *
      * @return True if it is supported, false if not.
      *
-     * @throws org.lwjgl3.openal.OpenALException If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has not
+     * @throws org.lwjgl.openal.OpenALException If the request fails due to an AL_OUT_OF_MEMORY error or OpenAL has not
      *                                          been created yet.
      * @throws IllegalArgumentException         filterType is not a valid filter type.
      */

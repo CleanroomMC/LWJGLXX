@@ -10,6 +10,6 @@ public class ARBClipControl {
     public static final int GL_ZERO_TO_ONE = (int) 37727;
 
     public static void glClipControl(int origin, int depth) {
-        org.lwjgl3.opengl.ARBClipControl.glClipControl(origin, depth);
+        org.lwjgl.opengl.ARBClipControl.glClipControl(origin, depth);
     }
 }

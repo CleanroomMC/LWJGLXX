@@ -19,6 +19,6 @@ public class ARBSync {
     public static final int GL_WAIT_FAILED = (int) 37149;
 
     public static long glGetInteger64(int pname) {
-        return org.lwjgl3.opengl.ARBSync.glGetInteger64(pname);
+        return org.lwjgl.opengl.ARBSync.glGetInteger64(pname);
     }
 }

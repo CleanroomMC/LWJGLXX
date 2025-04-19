@@ -8,6 +8,6 @@ public class EXTBlendMinmax {
     public static final int GL_MIN_EXT = (int) 32775;
 
     public static void glBlendEquationEXT(int mode) {
-        org.lwjgl3.opengl.EXTBlendMinmax.glBlendEquationEXT(mode);
+        org.lwjgl.opengl.EXTBlendMinmax.glBlendEquationEXT(mode);
     }
 }

@@ -15,7 +15,7 @@
  */
 package org.lwjglx;
 
-import org.lwjgl3.system.Platform;
+import org.lwjgl.system.Platform;
 
 import java.io.File;
 import java.lang.reflect.Field;
@@ -243,9 +243,9 @@ public class LWJGLUtil {
     public static final ByteBuffer LWJGLIcon32x32 = loadIcon(LWJGL_ICON_DATA_32x32);
 
     /** Debug flag. */
-    public static final boolean DEBUG = getPrivilegedBoolean("org.lwjgl3.util.Debug");
+    public static final boolean DEBUG = getPrivilegedBoolean("org.lwjgl.util.Debug");
 
-    public static final boolean CHECKS = !getPrivilegedBoolean("org.lwjgl3.util.NoChecks");
+    public static final boolean CHECKS = !getPrivilegedBoolean("org.lwjgl.util.NoChecks");
 
     private static final int PLATFORM;
 
@@ -333,7 +333,7 @@ public class LWJGLUtil {
             }
 
             // add Installer path
-            String alternative_path = getPrivilegedProperty("org.lwjgl3.librarypath");
+            String alternative_path = getPrivilegedProperty("org.lwjgl.librarypath");
             if (alternative_path != null) {
                 possible_paths.add(alternative_path + File.separator + platform_lib_name);
             }

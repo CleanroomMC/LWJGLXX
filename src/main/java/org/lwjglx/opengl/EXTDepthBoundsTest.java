@@ -6,6 +6,6 @@ public class EXTDepthBoundsTest {
     public static final int GL_DEPTH_BOUNDS_TEST_EXT = (int) 34960;
 
     public static void glDepthBoundsEXT(double zmin, double zmax) {
-        org.lwjgl3.opengl.EXTDepthBoundsTest.glDepthBoundsEXT(zmin, zmax);
+        org.lwjgl.opengl.EXTDepthBoundsTest.glDepthBoundsEXT(zmin, zmax);
     }
 }

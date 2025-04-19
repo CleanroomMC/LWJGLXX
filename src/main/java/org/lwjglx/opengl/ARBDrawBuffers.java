@@ -22,10 +22,10 @@ public class ARBDrawBuffers {
 
     public static void glDrawBuffersARB(int buffer) {
 
-        org.lwjgl3.opengl.ARBDrawBuffers.glDrawBuffersARB(new int[] { buffer });
+        org.lwjgl.opengl.ARBDrawBuffers.glDrawBuffersARB(new int[] { buffer });
     }
 
     public static void glDrawBuffersARB(java.nio.IntBuffer buffers) {
-        org.lwjgl3.opengl.ARBDrawBuffers.glDrawBuffersARB(buffers);
+        org.lwjgl.opengl.ARBDrawBuffers.glDrawBuffersARB(buffers);
     }
 }

@@ -11,7 +11,7 @@ public class ForgeEarlyConfig {
     public static boolean WINDOW_START_MAXIMIZED = false;
     public static boolean WINDOW_START_FOCUSED = true;
     public static boolean WINDOW_START_ICONIFIED = false;
-    public static boolean FORCE_X11 = false;
+    public static boolean FORCE_WAYLAND = false;
 
     public static boolean WINDOW_CENTERED = true;
 

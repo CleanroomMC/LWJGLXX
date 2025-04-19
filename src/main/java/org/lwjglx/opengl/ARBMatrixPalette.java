@@ -14,34 +14,34 @@ public class ARBMatrixPalette {
     public static final int GL_MAX_PALETTE_MATRICES_ARB = (int) 34882;
 
     public static void glCurrentPaletteMatrixARB(int index) {
-        org.lwjgl3.opengl.ARBMatrixPalette.glCurrentPaletteMatrixARB(index);
+        org.lwjgl.opengl.ARBMatrixPalette.glCurrentPaletteMatrixARB(index);
     }
 
     public static void glMatrixIndexPointerARB(int size, int type, int stride, long pPointer_buffer_offset) {
-        org.lwjgl3.opengl.ARBMatrixPalette.glMatrixIndexPointerARB(size, type, stride, pPointer_buffer_offset);
+        org.lwjgl.opengl.ARBMatrixPalette.glMatrixIndexPointerARB(size, type, stride, pPointer_buffer_offset);
     }
 
     public static void glMatrixIndexPointerARB(int size, int stride, java.nio.ByteBuffer pPointer) {
-        org.lwjgl3.opengl.ARBMatrixPalette.glMatrixIndexPointerARB(size, stride, pPointer);
+        org.lwjgl.opengl.ARBMatrixPalette.glMatrixIndexPointerARB(size, stride, pPointer);
     }
 
     public static void glMatrixIndexPointerARB(int size, int stride, java.nio.IntBuffer pPointer) {
-        org.lwjgl3.opengl.ARBMatrixPalette.glMatrixIndexPointerARB(size, stride, pPointer);
+        org.lwjgl.opengl.ARBMatrixPalette.glMatrixIndexPointerARB(size, stride, pPointer);
     }
 
     public static void glMatrixIndexPointerARB(int size, int stride, java.nio.ShortBuffer pPointer) {
-        org.lwjgl3.opengl.ARBMatrixPalette.glMatrixIndexPointerARB(size, stride, pPointer);
+        org.lwjgl.opengl.ARBMatrixPalette.glMatrixIndexPointerARB(size, stride, pPointer);
     }
 
     public static void glMatrixIndexuARB(java.nio.ByteBuffer pIndices) {
-        org.lwjgl3.opengl.ARBMatrixPalette.glMatrixIndexubvARB(pIndices);
+        org.lwjgl.opengl.ARBMatrixPalette.glMatrixIndexubvARB(pIndices);
     }
 
     public static void glMatrixIndexuARB(java.nio.IntBuffer pIndices) {
-        org.lwjgl3.opengl.ARBMatrixPalette.glMatrixIndexuivARB(pIndices);
+        org.lwjgl.opengl.ARBMatrixPalette.glMatrixIndexuivARB(pIndices);
     }
 
     public static void glMatrixIndexuARB(java.nio.ShortBuffer pIndices) {
-        org.lwjgl3.opengl.ARBMatrixPalette.glMatrixIndexusvARB(pIndices);
+        org.lwjgl.opengl.ARBMatrixPalette.glMatrixIndexusvARB(pIndices);
     }
 }

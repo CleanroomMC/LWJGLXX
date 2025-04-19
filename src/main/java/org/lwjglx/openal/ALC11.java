@@ -12,7 +12,7 @@ public class ALC11 {
 
     public static boolean alcCaptureCloseDevice(ALCdevice device) {
 
-        boolean returnValue = org.lwjgl3.openal.ALC11.alcCaptureCloseDevice(device.device);
+        boolean returnValue = org.lwjgl.openal.ALC11.alcCaptureCloseDevice(device.device);
 
         return returnValue;
     }
@@ -21,23 +21,23 @@ public class ALC11 {
                                                  int format) {
 
         ALCdevice returnValue = new ALCdevice(
-                org.lwjgl3.openal.ALC11.alcCaptureOpenDevice(arg0, arg1, frequency, format));
+                org.lwjgl.openal.ALC11.alcCaptureOpenDevice(arg0, arg1, frequency, format));
 
         return returnValue;
     }
 
     public static void alcCaptureSamples(ALCdevice device, java.nio.ByteBuffer buffer, int samples) {
 
-        org.lwjgl3.openal.ALC11.alcCaptureSamples(device.device, buffer, samples);
+        org.lwjgl.openal.ALC11.alcCaptureSamples(device.device, buffer, samples);
     }
 
     public static void alcCaptureStart(ALCdevice device) {
 
-        org.lwjgl3.openal.ALC11.alcCaptureStart(device.device);
+        org.lwjgl.openal.ALC11.alcCaptureStart(device.device);
     }
 
     public static void alcCaptureStop(ALCdevice device) {
 
-        org.lwjgl3.openal.ALC11.alcCaptureStop(device.device);
+        org.lwjgl.openal.ALC11.alcCaptureStop(device.device);
     }
 }

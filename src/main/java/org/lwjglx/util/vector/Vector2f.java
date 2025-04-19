@@ -54,7 +54,7 @@ public class Vector2f extends Vector implements Serializable, ReadableVector2f, 
 
     /*
      * (non-Javadoc)
-     * @see org.lwjgl3.util.vector.WritableVector2f#set(float, float)
+     * @see org.lwjgl.util.vector.WritableVector2f#set(float, float)
      */
     public void set(float x, float y) {
         this.x = x;
@@ -215,7 +215,7 @@ public class Vector2f extends Vector implements Serializable, ReadableVector2f, 
 
     /*
      * (non-Javadoc)
-     * @see org.lwjgl3.vector.Vector#scale(float)
+     * @see org.lwjgl.vector.Vector#scale(float)
      */
     public Vector scale(float scale) {
 

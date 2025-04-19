@@ -378,7 +378,7 @@ public class Matrix2f extends Matrix implements Serializable {
 
     /*
      * (non-Javadoc)
-     * @see org.lwjgl3.vector.Matrix#determinant()
+     * @see org.lwjgl.vector.Matrix#determinant()
      */
     public float determinant() {
         return m00 * m11 - m01 * m10;

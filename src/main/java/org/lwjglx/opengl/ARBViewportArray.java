@@ -13,14 +13,14 @@ public class ARBViewportArray {
     public static final int GL_VIEWPORT_SUBPIXEL_BITS = (int) 33372;
 
     public static void glDepthRangeIndexed(int index, double n, double f) {
-        org.lwjgl3.opengl.ARBViewportArray.glDepthRangeIndexed(index, n, f);
+        org.lwjgl.opengl.ARBViewportArray.glDepthRangeIndexed(index, n, f);
     }
 
     public static void glScissorIndexed(int index, int left, int bottom, int width, int height) {
-        org.lwjgl3.opengl.ARBViewportArray.glScissorIndexed(index, left, bottom, width, height);
+        org.lwjgl.opengl.ARBViewportArray.glScissorIndexed(index, left, bottom, width, height);
     }
 
     public static void glViewportIndexedf(int index, float x, float y, float w, float h) {
-        org.lwjgl3.opengl.ARBViewportArray.glViewportIndexedf(index, x, y, w, h);
+        org.lwjgl.opengl.ARBViewportArray.glViewportIndexedf(index, x, y, w, h);
     }
 }

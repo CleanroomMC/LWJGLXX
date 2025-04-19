@@ -6,8 +6,8 @@ import java.nio.IntBuffer;
 import net.minecraftforge.common.ForgeEarlyConfig;
 
 import org.apache.commons.lang3.StringUtils;
-import org.lwjgl3.BufferUtils;
-import org.lwjgl3.glfw.GLFW;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.glfw.GLFW;
 import org.lwjglx.LWJGLException;
 import org.lwjglx.Sys;
 import org.lwjglx.opengl.Display;

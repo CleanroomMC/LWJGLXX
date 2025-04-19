@@ -8,7 +8,7 @@ public class EXTBlendFuncSeparate {
     public static final int GL_BLEND_SRC_RGB_EXT = (int) 32969;
 
     public static void glBlendFuncSeparateEXT(int sfactorRGB, int dfactorRGB, int sfactorAlpha, int dfactorAlpha) {
-        org.lwjgl3.opengl.EXTBlendFuncSeparate
+        org.lwjgl.opengl.EXTBlendFuncSeparate
                 .glBlendFuncSeparateEXT(sfactorRGB, dfactorRGB, sfactorAlpha, dfactorAlpha);
     }
 }

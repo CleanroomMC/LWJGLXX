@@ -4,7 +4,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetCompressedTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset,
             int width, int height, int depth, int pixels_bufSize, long pixels_buffer_offset) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -19,7 +19,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetCompressedTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset,
             int width, int height, int depth, java.nio.ByteBuffer pixels) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -33,7 +33,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetCompressedTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset,
             int width, int height, int depth, java.nio.DoubleBuffer pixels) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -47,7 +47,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetCompressedTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset,
             int width, int height, int depth, java.nio.FloatBuffer pixels) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -61,7 +61,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetCompressedTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset,
             int width, int height, int depth, java.nio.IntBuffer pixels) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -75,7 +75,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetCompressedTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset,
             int width, int height, int depth, java.nio.ShortBuffer pixels) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetCompressedTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -89,7 +89,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, int pixels_bufSize, long pixels_buffer_offset) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -106,7 +106,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, java.nio.ByteBuffer pixels) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -122,7 +122,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, java.nio.DoubleBuffer pixels) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -138,7 +138,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, java.nio.FloatBuffer pixels) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -154,7 +154,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, java.nio.IntBuffer pixels) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
                 texture,
                 level,
                 xoffset,
@@ -170,7 +170,7 @@ public class ARBGetTextureSubImage {
 
     public static void glGetTextureSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, java.nio.ShortBuffer pixels) {
-        org.lwjgl3.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
+        org.lwjgl.opengl.ARBGetTextureSubImage.glGetTextureSubImage(
                 texture,
                 level,
                 xoffset,

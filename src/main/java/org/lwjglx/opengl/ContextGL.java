@@ -15,8 +15,8 @@
  */
 package org.lwjglx.opengl;
 
-import org.lwjgl3.glfw.GLFW;
-import org.lwjgl3.opengl.GL;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.opengl.GL;
 import org.lwjglx.LWJGLException;
 import org.lwjglx.PointerBuffer;
 

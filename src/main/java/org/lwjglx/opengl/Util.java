@@ -15,9 +15,9 @@
  */
 package org.lwjglx.opengl;
 
-import static org.lwjgl3.opengl.ARBImaging.*;
-import static org.lwjgl3.opengl.GL11.*;
-import static org.lwjgl3.opengl.GL30.*;
+import static org.lwjgl.opengl.ARBImaging.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL30.*;
 
 /**
  * Simple utility class.

@@ -20,7 +20,7 @@ public class ARBShaderStorageBufferObject {
     public static final int GL_SHADER_STORAGE_BUFFER_START = (int) 37076;
 
     public static void glShaderStorageBlockBinding(int program, int storageBlockIndex, int storageBlockBinding) {
-        org.lwjgl3.opengl.ARBShaderStorageBufferObject
+        org.lwjgl.opengl.ARBShaderStorageBufferObject
                 .glShaderStorageBlockBinding(program, storageBlockIndex, storageBlockBinding);
     }
 }

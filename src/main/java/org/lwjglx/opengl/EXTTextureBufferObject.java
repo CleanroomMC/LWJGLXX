@@ -9,6 +9,6 @@ public class EXTTextureBufferObject {
     public static final int GL_TEXTURE_BUFFER_FORMAT_EXT = (int) 35886;
 
     public static void glTexBufferEXT(int target, int internalformat, int buffer) {
-        org.lwjgl3.opengl.EXTTextureBufferObject.glTexBufferEXT(target, internalformat, buffer);
+        org.lwjgl.opengl.EXTTextureBufferObject.glTexBufferEXT(target, internalformat, buffer);
     }
 }

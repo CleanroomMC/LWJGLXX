@@ -8,10 +8,10 @@ public class ARBTransposeMatrix {
     public static final int GL_TRANSPOSE_TEXTURE_MATRIX_ARB = (int) 34021;
 
     public static void glLoadTransposeMatrixARB(java.nio.FloatBuffer pfMtx) {
-        org.lwjgl3.opengl.ARBTransposeMatrix.glLoadTransposeMatrixfARB(pfMtx);
+        org.lwjgl.opengl.ARBTransposeMatrix.glLoadTransposeMatrixfARB(pfMtx);
     }
 
     public static void glMultTransposeMatrixARB(java.nio.FloatBuffer pfMtx) {
-        org.lwjgl3.opengl.ARBTransposeMatrix.glMultTransposeMatrixfARB(pfMtx);
+        org.lwjgl.opengl.ARBTransposeMatrix.glMultTransposeMatrixfARB(pfMtx);
     }
 }

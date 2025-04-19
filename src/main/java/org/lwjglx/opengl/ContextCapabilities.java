@@ -4,11 +4,11 @@ import java.lang.reflect.Field;
 
 public class ContextCapabilities {
 
-    org.lwjgl3.opengl.GLCapabilities cap = org.lwjgl3.opengl.GL.getCapabilities();
+    org.lwjgl.opengl.GLCapabilities cap = org.lwjgl.opengl.GL.getCapabilities();
 
     public ContextCapabilities() {
 
-        Field[] fields = org.lwjgl3.opengl.GLCapabilities.class.getFields();
+        Field[] fields = org.lwjgl.opengl.GLCapabilities.class.getFields();
 
         try {
             for (Field field : fields) {

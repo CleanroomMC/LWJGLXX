@@ -15,8 +15,8 @@
  */
 package org.lwjglx.util.glu;
 
-import static org.lwjgl3.opengl.GL11.*;
-import static org.lwjgl3.opengl.GL12.*;
+import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL12.*;
 
 import java.nio.IntBuffer;
 
@@ -186,7 +186,7 @@ public class Util {
      */
     protected static int glGetIntegerv(int what) {
         scratch.rewind();
-        org.lwjgl3.opengl.GL11.glGetIntegerv(what, scratch);
+        org.lwjgl.opengl.GL11.glGetIntegerv(what, scratch);
         return scratch.get();
     }
 }

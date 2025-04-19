@@ -9,6 +9,6 @@ public class ARBTextureBufferObject {
     public static final int GL_TEXTURE_BUFFER_FORMAT_ARB = (int) 35886;
 
     public static void glTexBufferARB(int target, int internalformat, int buffer) {
-        org.lwjgl3.opengl.ARBTextureBufferObject.glTexBufferARB(target, internalformat, buffer);
+        org.lwjgl.opengl.ARBTextureBufferObject.glTexBufferARB(target, internalformat, buffer);
     }
 }

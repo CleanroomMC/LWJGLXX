@@ -4,12 +4,12 @@ public class ARBBaseInstance {
 
     public static void glDrawArraysInstancedBaseInstance(int mode, int first, int count, int primcount,
             int baseinstance) {
-        org.lwjgl3.opengl.ARBBaseInstance.glDrawArraysInstancedBaseInstance(mode, first, count, primcount, baseinstance);
+        org.lwjgl.opengl.ARBBaseInstance.glDrawArraysInstancedBaseInstance(mode, first, count, primcount, baseinstance);
     }
 
     public static void glDrawElementsInstancedBaseInstance(int mode, int indices_count, int type,
             long indices_buffer_offset, int primcount, int baseinstance) {
-        org.lwjgl3.opengl.ARBBaseInstance.glDrawElementsInstancedBaseInstance(
+        org.lwjgl.opengl.ARBBaseInstance.glDrawElementsInstancedBaseInstance(
                 mode,
                 indices_count,
                 type,
@@ -20,22 +20,22 @@ public class ARBBaseInstance {
 
     public static void glDrawElementsInstancedBaseInstance(int mode, java.nio.ByteBuffer indices, int primcount,
             int baseinstance) {
-        org.lwjgl3.opengl.ARBBaseInstance.glDrawElementsInstancedBaseInstance(mode, indices, primcount, baseinstance);
+        org.lwjgl.opengl.ARBBaseInstance.glDrawElementsInstancedBaseInstance(mode, indices, primcount, baseinstance);
     }
 
     public static void glDrawElementsInstancedBaseInstance(int mode, java.nio.IntBuffer indices, int primcount,
             int baseinstance) {
-        org.lwjgl3.opengl.ARBBaseInstance.glDrawElementsInstancedBaseInstance(mode, indices, primcount, baseinstance);
+        org.lwjgl.opengl.ARBBaseInstance.glDrawElementsInstancedBaseInstance(mode, indices, primcount, baseinstance);
     }
 
     public static void glDrawElementsInstancedBaseInstance(int mode, java.nio.ShortBuffer indices, int primcount,
             int baseinstance) {
-        org.lwjgl3.opengl.ARBBaseInstance.glDrawElementsInstancedBaseInstance(mode, indices, primcount, baseinstance);
+        org.lwjgl.opengl.ARBBaseInstance.glDrawElementsInstancedBaseInstance(mode, indices, primcount, baseinstance);
     }
 
     public static void glDrawElementsInstancedBaseVertexBaseInstance(int mode, int indices_count, int type,
             long indices_buffer_offset, int primcount, int basevertex, int baseinstance) {
-        org.lwjgl3.opengl.ARBBaseInstance.glDrawElementsInstancedBaseVertexBaseInstance(
+        org.lwjgl.opengl.ARBBaseInstance.glDrawElementsInstancedBaseVertexBaseInstance(
                 mode,
                 indices_count,
                 type,
@@ -47,19 +47,19 @@ public class ARBBaseInstance {
 
     public static void glDrawElementsInstancedBaseVertexBaseInstance(int mode, java.nio.ByteBuffer indices,
             int primcount, int basevertex, int baseinstance) {
-        org.lwjgl3.opengl.ARBBaseInstance
+        org.lwjgl.opengl.ARBBaseInstance
                 .glDrawElementsInstancedBaseVertexBaseInstance(mode, indices, primcount, basevertex, baseinstance);
     }
 
     public static void glDrawElementsInstancedBaseVertexBaseInstance(int mode, java.nio.IntBuffer indices,
             int primcount, int basevertex, int baseinstance) {
-        org.lwjgl3.opengl.ARBBaseInstance
+        org.lwjgl.opengl.ARBBaseInstance
                 .glDrawElementsInstancedBaseVertexBaseInstance(mode, indices, primcount, basevertex, baseinstance);
     }
 
     public static void glDrawElementsInstancedBaseVertexBaseInstance(int mode, java.nio.ShortBuffer indices,
             int primcount, int basevertex, int baseinstance) {
-        org.lwjgl3.opengl.ARBBaseInstance
+        org.lwjgl.opengl.ARBBaseInstance
                 .glDrawElementsInstancedBaseVertexBaseInstance(mode, indices, primcount, basevertex, baseinstance);
     }
 }

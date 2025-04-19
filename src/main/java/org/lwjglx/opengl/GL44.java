@@ -23,59 +23,59 @@ public class GL44 {
     public static final int GL_TRANSFORM_FEEDBACK_BUFFER_STRIDE = (int) 37708;
 
     public static void glBufferStorage(int target, long size, int flags) {
-        org.lwjgl3.opengl.GL44.glBufferStorage(target, size, flags);
+        org.lwjgl.opengl.GL44.glBufferStorage(target, size, flags);
     }
 
     public static void glBufferStorage(int target, java.nio.ByteBuffer data, int flags) {
-        org.lwjgl3.opengl.GL44.glBufferStorage(target, data, flags);
+        org.lwjgl.opengl.GL44.glBufferStorage(target, data, flags);
     }
 
     public static void glBufferStorage(int target, java.nio.DoubleBuffer data, int flags) {
-        org.lwjgl3.opengl.GL44.glBufferStorage(target, data, flags);
+        org.lwjgl.opengl.GL44.glBufferStorage(target, data, flags);
     }
 
     public static void glBufferStorage(int target, java.nio.FloatBuffer data, int flags) {
-        org.lwjgl3.opengl.GL44.glBufferStorage(target, data, flags);
+        org.lwjgl.opengl.GL44.glBufferStorage(target, data, flags);
     }
 
     public static void glBufferStorage(int target, java.nio.IntBuffer data, int flags) {
-        org.lwjgl3.opengl.GL44.glBufferStorage(target, data, flags);
+        org.lwjgl.opengl.GL44.glBufferStorage(target, data, flags);
     }
 
     public static void glBufferStorage(int target, java.nio.ShortBuffer data, int flags) {
-        org.lwjgl3.opengl.GL44.glBufferStorage(target, data, flags);
+        org.lwjgl.opengl.GL44.glBufferStorage(target, data, flags);
     }
 
     public static void glClearTexImage(int texture, int level, int format, int type, java.nio.ByteBuffer data) {
-        org.lwjgl3.opengl.GL44.glClearTexImage(texture, level, format, type, data);
+        org.lwjgl.opengl.GL44.glClearTexImage(texture, level, format, type, data);
     }
 
     public static void glClearTexImage(int texture, int level, int format, int type, java.nio.DoubleBuffer data) {
-        org.lwjgl3.opengl.GL44.glClearTexImage(texture, level, format, type, data);
+        org.lwjgl.opengl.GL44.glClearTexImage(texture, level, format, type, data);
     }
 
     public static void glClearTexImage(int texture, int level, int format, int type, java.nio.FloatBuffer data) {
-        org.lwjgl3.opengl.GL44.glClearTexImage(texture, level, format, type, data);
+        org.lwjgl.opengl.GL44.glClearTexImage(texture, level, format, type, data);
     }
 
     public static void glClearTexImage(int texture, int level, int format, int type, java.nio.IntBuffer data) {
-        org.lwjgl3.opengl.GL44.glClearTexImage(texture, level, format, type, data);
+        org.lwjgl.opengl.GL44.glClearTexImage(texture, level, format, type, data);
     }
 
     public static void glClearTexImage(int texture, int level, int format, int type, java.nio.LongBuffer data) {
         final java.nio.ByteBuffer wrappedArg4 = BufferCasts.toByteBuffer(data);
 
-        org.lwjgl3.opengl.GL44.glClearTexImage(texture, level, format, type, wrappedArg4);
+        org.lwjgl.opengl.GL44.glClearTexImage(texture, level, format, type, wrappedArg4);
         BufferCasts.updateBuffer(data, wrappedArg4);
     }
 
     public static void glClearTexImage(int texture, int level, int format, int type, java.nio.ShortBuffer data) {
-        org.lwjgl3.opengl.GL44.glClearTexImage(texture, level, format, type, data);
+        org.lwjgl.opengl.GL44.glClearTexImage(texture, level, format, type, data);
     }
 
     public static void glClearTexSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, java.nio.ByteBuffer data) {
-        org.lwjgl3.opengl.GL44.glClearTexSubImage(
+        org.lwjgl.opengl.GL44.glClearTexSubImage(
                 texture,
                 level,
                 xoffset,
@@ -91,7 +91,7 @@ public class GL44 {
 
     public static void glClearTexSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, java.nio.DoubleBuffer data) {
-        org.lwjgl3.opengl.GL44.glClearTexSubImage(
+        org.lwjgl.opengl.GL44.glClearTexSubImage(
                 texture,
                 level,
                 xoffset,
@@ -107,7 +107,7 @@ public class GL44 {
 
     public static void glClearTexSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, java.nio.FloatBuffer data) {
-        org.lwjgl3.opengl.GL44.glClearTexSubImage(
+        org.lwjgl.opengl.GL44.glClearTexSubImage(
                 texture,
                 level,
                 xoffset,
@@ -123,7 +123,7 @@ public class GL44 {
 
     public static void glClearTexSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, java.nio.IntBuffer data) {
-        org.lwjgl3.opengl.GL44.glClearTexSubImage(
+        org.lwjgl.opengl.GL44.glClearTexSubImage(
                 texture,
                 level,
                 xoffset,
@@ -141,7 +141,7 @@ public class GL44 {
             int height, int depth, int format, int type, java.nio.LongBuffer data) {
         final java.nio.ByteBuffer wrappedArg10 = BufferCasts.toByteBuffer(data);
 
-        org.lwjgl3.opengl.GL44.glClearTexSubImage(
+        org.lwjgl.opengl.GL44.glClearTexSubImage(
                 texture,
                 level,
                 xoffset,
@@ -158,7 +158,7 @@ public class GL44 {
 
     public static void glClearTexSubImage(int texture, int level, int xoffset, int yoffset, int zoffset, int width,
             int height, int depth, int format, int type, java.nio.ShortBuffer data) {
-        org.lwjgl3.opengl.GL44.glClearTexSubImage(
+        org.lwjgl.opengl.GL44.glClearTexSubImage(
                 texture,
                 level,
                 xoffset,

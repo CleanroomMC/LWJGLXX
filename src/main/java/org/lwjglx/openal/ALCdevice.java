@@ -51,7 +51,7 @@ public final class ALCdevice {
     }
 
     public static long alcOpenDevice(String deviceSpecifier) {
-        return org.lwjgl3.openal.ALC10.alcOpenDevice(deviceSpecifier);
+        return org.lwjgl.openal.ALC10.alcOpenDevice(deviceSpecifier);
     }
 
         /*

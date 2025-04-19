@@ -15,7 +15,7 @@
  */
 package org.lwjglx.util.glu;
 
-import static org.lwjgl3.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.*;
 import static org.lwjglx.util.glu.GLU.*;
 
 /**

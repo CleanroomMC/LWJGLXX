@@ -8,10 +8,10 @@ public class INTELMapTexture {
     public static final int GL_TEXTURE_MEMORY_LAYOUT_INTEL = (int) 33791;
 
     public static void glSyncTextureINTEL(int texture) {
-        org.lwjgl3.opengl.INTELMapTexture.glSyncTextureINTEL(texture);
+        org.lwjgl.opengl.INTELMapTexture.glSyncTextureINTEL(texture);
     }
 
     public static void glUnmapTexture2DINTEL(int texture, int level) {
-        org.lwjgl3.opengl.INTELMapTexture.glUnmapTexture2DINTEL(texture, level);
+        org.lwjgl.opengl.INTELMapTexture.glUnmapTexture2DINTEL(texture, level);
     }
 }

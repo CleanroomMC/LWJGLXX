@@ -8,6 +8,6 @@ public class EXTProvokingVertex {
     public static final int GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION_EXT = (int) 36428;
 
     public static void glProvokingVertexEXT(int mode) {
-        org.lwjgl3.opengl.EXTProvokingVertex.glProvokingVertexEXT(mode);
+        org.lwjgl.opengl.EXTProvokingVertex.glProvokingVertexEXT(mode);
     }
 }

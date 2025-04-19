@@ -2,9 +2,9 @@ package org.lwjglx.opengl;
 
 import java.nio.ByteBuffer;
 
-import org.lwjgl3.BufferUtils;
-import org.lwjgl3.PointerBuffer;
-import org.lwjgl3.opengl.GL15;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.PointerBuffer;
+import org.lwjgl.opengl.GL15;
 
 public class GL15x {
 

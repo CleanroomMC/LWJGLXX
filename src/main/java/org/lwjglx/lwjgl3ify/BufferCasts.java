@@ -2,7 +2,7 @@ package org.lwjglx.lwjgl3ify;
 
 import java.nio.*;
 
-import org.lwjgl3.system.MemoryUtil;
+import org.lwjgl.system.MemoryUtil;
 
 public class BufferCasts {
 

@@ -8,6 +8,6 @@ public class ARBProvokingVertex {
     public static final int GL_QUADS_FOLLOW_PROVOKING_VERTEX_CONVENTION = (int) 36428;
 
     public static void glProvokingVertex(int mode) {
-        org.lwjgl3.opengl.ARBProvokingVertex.glProvokingVertex(mode);
+        org.lwjgl.opengl.ARBProvokingVertex.glProvokingVertex(mode);
     }
 }

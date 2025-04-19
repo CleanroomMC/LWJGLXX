@@ -34,15 +34,15 @@ ext {
     // Do not change the order unless it is required so
     lwjglLibraries = [
             [
-                    'lwjgl3-glfw', 'lwjgl3-jemalloc', 'lwjgl3-openal',
-                    'lwjgl3-opengl', 'lwjgl3-stb', 'lwjgl3-tinyfd', 'lwjgl3'
+                    'lwjgl-glfw', 'lwjgl-jemalloc', 'lwjgl-openal',
+                    'lwjgl-opengl', 'lwjgl-stb', 'lwjgl-tinyfd', 'lwjgl'
             ]
     ]
 }
 
 dependencies {
     lwjglLibraries[0].each {
-        compileOnly "org.lwjgl3:$it:3.3.4-27-CLEANROOM"
+        compileOnly "org.lwjgl:$it:3.3.6"
     }
     compileOnly 'org.apache.commons:commons-lang3:3.17.0'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'

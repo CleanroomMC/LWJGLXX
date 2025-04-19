@@ -6,6 +6,6 @@ public class ARBSampleShading {
     public static final int GL_SAMPLE_SHADING_ARB = (int) 35894;
 
     public static void glMinSampleShadingARB(float value) {
-        org.lwjgl3.opengl.ARBSampleShading.glMinSampleShadingARB(value);
+        org.lwjgl.opengl.ARBSampleShading.glMinSampleShadingARB(value);
     }
 }

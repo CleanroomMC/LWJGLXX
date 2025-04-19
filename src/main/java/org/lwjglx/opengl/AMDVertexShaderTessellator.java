@@ -11,10 +11,10 @@ public class AMDVertexShaderTessellator {
     public static final int GL_UNSIGNED_INT_SAMPLER_BUFFER_AMD = (int) 36867;
 
     public static void glTessellationFactorAMD(float factor) {
-        org.lwjgl3.opengl.AMDVertexShaderTessellator.glTessellationFactorAMD(factor);
+        org.lwjgl.opengl.AMDVertexShaderTessellator.glTessellationFactorAMD(factor);
     }
 
     public static void glTessellationModeAMD(int mode) {
-        org.lwjgl3.opengl.AMDVertexShaderTessellator.glTessellationModeAMD(mode);
+        org.lwjgl.opengl.AMDVertexShaderTessellator.glTessellationModeAMD(mode);
     }
 }

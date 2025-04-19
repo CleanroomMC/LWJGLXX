@@ -8,7 +8,7 @@ public class EXTFramebufferMultisample {
 
     public static void glRenderbufferStorageMultisampleEXT(int target, int samples, int internalformat, int width,
             int height) {
-        org.lwjgl3.opengl.EXTFramebufferMultisample
+        org.lwjgl.opengl.EXTFramebufferMultisample
                 .glRenderbufferStorageMultisampleEXT(target, samples, internalformat, width, height);
     }
 }

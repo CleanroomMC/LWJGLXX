@@ -9,6 +9,6 @@ public class EXTBlendColor {
     public static final int GL_ONE_MINUS_CONSTANT_COLOR_EXT = (int) 32770;
 
     public static void glBlendColorEXT(float red, float green, float blue, float alpha) {
-        org.lwjgl3.opengl.EXTBlendColor.glBlendColorEXT(red, green, blue, alpha);
+        org.lwjgl.opengl.EXTBlendColor.glBlendColorEXT(red, green, blue, alpha);
     }
 }

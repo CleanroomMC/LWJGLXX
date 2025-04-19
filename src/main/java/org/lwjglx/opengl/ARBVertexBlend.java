@@ -49,83 +49,83 @@ public class ARBVertexBlend {
     public static final int GL_WEIGHT_SUM_UNITY_ARB = (int) 34470;
 
     public static void glVertexBlendARB(int count) {
-        org.lwjgl3.opengl.ARBVertexBlend.glVertexBlendARB(count);
+        org.lwjgl.opengl.ARBVertexBlend.glVertexBlendARB(count);
     }
 
     public static void glWeightARB(java.nio.ByteBuffer pWeights) {
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightbvARB(pWeights);
+        org.lwjgl.opengl.ARBVertexBlend.glWeightbvARB(pWeights);
     }
 
     public static void glWeightARB(java.nio.DoubleBuffer pWeights) {
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightdvARB(pWeights);
+        org.lwjgl.opengl.ARBVertexBlend.glWeightdvARB(pWeights);
     }
 
     public static void glWeightARB(java.nio.FloatBuffer pWeights) {
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightfvARB(pWeights);
+        org.lwjgl.opengl.ARBVertexBlend.glWeightfvARB(pWeights);
     }
 
     public static void glWeightARB(java.nio.IntBuffer pWeights) {
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightivARB(pWeights);
+        org.lwjgl.opengl.ARBVertexBlend.glWeightivARB(pWeights);
     }
 
     public static void glWeightARB(java.nio.ShortBuffer pWeights) {
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightsvARB(pWeights);
+        org.lwjgl.opengl.ARBVertexBlend.glWeightsvARB(pWeights);
     }
 
     public static void glWeightPointerARB(int size, int type, int stride, long pPointer_buffer_offset) {
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightPointerARB(size, type, stride, pPointer_buffer_offset);
+        org.lwjgl.opengl.ARBVertexBlend.glWeightPointerARB(size, type, stride, pPointer_buffer_offset);
     }
 
     public static void glWeightPointerARB(int size, int stride, java.nio.DoubleBuffer pPointer) {
 
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightPointerARB(
+        org.lwjgl.opengl.ARBVertexBlend.glWeightPointerARB(
                 size,
-                org.lwjgl3.opengl.GL11.GL_DOUBLE,
+                org.lwjgl.opengl.GL11.GL_DOUBLE,
                 stride,
                 BufferCasts.toByteBuffer(pPointer));
     }
 
     public static void glWeightPointerARB(int size, int stride, java.nio.FloatBuffer pPointer) {
 
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightPointerARB(size, org.lwjgl3.opengl.GL11.GL_FLOAT, stride, pPointer);
+        org.lwjgl.opengl.ARBVertexBlend.glWeightPointerARB(size, org.lwjgl.opengl.GL11.GL_FLOAT, stride, pPointer);
     }
 
     public static void glWeightPointerARB(int size, boolean unsigned, int stride, java.nio.ByteBuffer pPointer) {
 
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightPointerARB(
+        org.lwjgl.opengl.ARBVertexBlend.glWeightPointerARB(
                 size,
-                (unsigned ? org.lwjgl3.opengl.GL11.GL_UNSIGNED_BYTE : org.lwjgl3.opengl.GL11.GL_BYTE),
+                (unsigned ? org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE : org.lwjgl.opengl.GL11.GL_BYTE),
                 stride,
                 MemoryUtil.getAddress(pPointer));
     }
 
     public static void glWeightPointerARB(int size, boolean unsigned, int stride, java.nio.IntBuffer pPointer) {
 
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightPointerARB(
+        org.lwjgl.opengl.ARBVertexBlend.glWeightPointerARB(
                 size,
-                (unsigned ? org.lwjgl3.opengl.GL11.GL_UNSIGNED_INT : org.lwjgl3.opengl.GL11.GL_INT),
+                (unsigned ? org.lwjgl.opengl.GL11.GL_UNSIGNED_INT : org.lwjgl.opengl.GL11.GL_INT),
                 stride,
                 MemoryUtil.getAddress(pPointer));
     }
 
     public static void glWeightPointerARB(int size, boolean unsigned, int stride, java.nio.ShortBuffer pPointer) {
 
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightPointerARB(
+        org.lwjgl.opengl.ARBVertexBlend.glWeightPointerARB(
                 size,
-                (unsigned ? org.lwjgl3.opengl.GL11.GL_UNSIGNED_SHORT : org.lwjgl3.opengl.GL11.GL_SHORT),
+                (unsigned ? org.lwjgl.opengl.GL11.GL_UNSIGNED_SHORT : org.lwjgl.opengl.GL11.GL_SHORT),
                 stride,
                 MemoryUtil.getAddress(pPointer));
     }
 
     public static void glWeightuARB(java.nio.ByteBuffer pWeights) {
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightubvARB(pWeights);
+        org.lwjgl.opengl.ARBVertexBlend.glWeightubvARB(pWeights);
     }
 
     public static void glWeightuARB(java.nio.IntBuffer pWeights) {
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightuivARB(pWeights);
+        org.lwjgl.opengl.ARBVertexBlend.glWeightuivARB(pWeights);
     }
 
     public static void glWeightuARB(java.nio.ShortBuffer pWeights) {
-        org.lwjgl3.opengl.ARBVertexBlend.glWeightusvARB(pWeights);
+        org.lwjgl.opengl.ARBVertexBlend.glWeightusvARB(pWeights);
     }
 }

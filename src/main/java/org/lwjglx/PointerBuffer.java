@@ -22,16 +22,16 @@ import java.nio.*;
 
 import javax.annotation.Nullable;
 
-public class PointerBuffer extends org.lwjgl3.PointerBuffer {
+public class PointerBuffer extends org.lwjgl.PointerBuffer {
 
     private static final Field containerAccess;
 
     static {
-        Class<org.lwjgl3.PointerBuffer> pbClass = org.lwjgl3.PointerBuffer.class;
+        Class<org.lwjgl.PointerBuffer> pbClass = org.lwjgl.PointerBuffer.class;
         containerAccess = FieldUtils.getField(pbClass, "container", true);
     }
 
-    private static ByteBuffer getContainer(org.lwjgl3.PointerBuffer buffer) {
+    private static ByteBuffer getContainer(org.lwjgl.PointerBuffer buffer) {
         try {
             return (ByteBuffer) containerAccess.get(buffer);
         } catch (IllegalAccessException e) {
@@ -44,7 +44,7 @@ public class PointerBuffer extends org.lwjgl3.PointerBuffer {
         super(address, container, mark, position, limit, capacity);
     }
 
-    protected PointerBuffer(org.lwjgl3.PointerBuffer ver3) {
+    protected PointerBuffer(org.lwjgl.PointerBuffer ver3) {
         super(ver3.address(), getContainer(ver3), ver3.position(), ver3.position(), ver3.limit(), ver3.capacity());
     }
 
@@ -62,7 +62,7 @@ public class PointerBuffer extends org.lwjgl3.PointerBuffer {
      * @throws IllegalArgumentException If the {@code capacity} is a negative integer
      */
     public static PointerBuffer allocateDirect(int capacity) {
-        return new PointerBuffer(org.lwjgl3.PointerBuffer.allocateDirect(capacity));
+        return new PointerBuffer(org.lwjgl.PointerBuffer.allocateDirect(capacity));
     }
 
     /**
@@ -72,7 +72,7 @@ public class PointerBuffer extends org.lwjgl3.PointerBuffer {
      * @param capacity the buffer capacity, in number of pointers
      */
     public static PointerBuffer create(long address, int capacity) {
-        return new PointerBuffer(org.lwjgl3.PointerBuffer.create(address, capacity));
+        return new PointerBuffer(org.lwjgl.PointerBuffer.create(address, capacity));
     }
 
     /**
@@ -81,6 +81,6 @@ public class PointerBuffer extends org.lwjgl3.PointerBuffer {
      * @param source the source buffer
      */
     public static PointerBuffer create(ByteBuffer source) {
-        return new PointerBuffer(org.lwjgl3.PointerBuffer.create(source));
+        return new PointerBuffer(org.lwjgl.PointerBuffer.create(source));
     }
 }

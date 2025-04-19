@@ -14,46 +14,46 @@ public class EXTSecondaryColor {
     public static final int GL_SECONDARY_COLOR_ARRAY_TYPE_EXT = (int) 33883;
 
     public static void glSecondaryColor3bEXT(byte red, byte green, byte blue) {
-        org.lwjgl3.opengl.EXTSecondaryColor.glSecondaryColor3bEXT(red, green, blue);
+        org.lwjgl.opengl.EXTSecondaryColor.glSecondaryColor3bEXT(red, green, blue);
     }
 
     public static void glSecondaryColor3dEXT(double red, double green, double blue) {
-        org.lwjgl3.opengl.EXTSecondaryColor.glSecondaryColor3dEXT(red, green, blue);
+        org.lwjgl.opengl.EXTSecondaryColor.glSecondaryColor3dEXT(red, green, blue);
     }
 
     public static void glSecondaryColor3fEXT(float red, float green, float blue) {
-        org.lwjgl3.opengl.EXTSecondaryColor.glSecondaryColor3fEXT(red, green, blue);
+        org.lwjgl.opengl.EXTSecondaryColor.glSecondaryColor3fEXT(red, green, blue);
     }
 
     public static void glSecondaryColor3ubEXT(byte red, byte green, byte blue) {
-        org.lwjgl3.opengl.EXTSecondaryColor.glSecondaryColor3ubEXT(red, green, blue);
+        org.lwjgl.opengl.EXTSecondaryColor.glSecondaryColor3ubEXT(red, green, blue);
     }
 
     public static void glSecondaryColorPointerEXT(int size, int type, int stride, long pPointer_buffer_offset) {
-        org.lwjgl3.opengl.EXTSecondaryColor.glSecondaryColorPointerEXT(size, type, stride, pPointer_buffer_offset);
+        org.lwjgl.opengl.EXTSecondaryColor.glSecondaryColorPointerEXT(size, type, stride, pPointer_buffer_offset);
     }
 
     public static void glSecondaryColorPointerEXT(int size, int stride, java.nio.DoubleBuffer pPointer) {
 
-        org.lwjgl3.opengl.EXTSecondaryColor.glSecondaryColorPointerEXT(
+        org.lwjgl.opengl.EXTSecondaryColor.glSecondaryColorPointerEXT(
                 size,
-                org.lwjgl3.opengl.GL11.GL_DOUBLE,
+                org.lwjgl.opengl.GL11.GL_DOUBLE,
                 stride,
                 BufferCasts.toByteBuffer(pPointer));
     }
 
     public static void glSecondaryColorPointerEXT(int size, int stride, java.nio.FloatBuffer pPointer) {
 
-        org.lwjgl3.opengl.EXTSecondaryColor
-                .glSecondaryColorPointerEXT(size, org.lwjgl3.opengl.GL11.GL_FLOAT, stride, pPointer);
+        org.lwjgl.opengl.EXTSecondaryColor
+                .glSecondaryColorPointerEXT(size, org.lwjgl.opengl.GL11.GL_FLOAT, stride, pPointer);
     }
 
     public static void glSecondaryColorPointerEXT(int size, boolean unsigned, int stride,
             java.nio.ByteBuffer pPointer) {
 
-        org.lwjgl3.opengl.EXTSecondaryColor.glSecondaryColorPointerEXT(
+        org.lwjgl.opengl.EXTSecondaryColor.glSecondaryColorPointerEXT(
                 size,
-                (unsigned ? org.lwjgl3.opengl.GL11.GL_UNSIGNED_BYTE : org.lwjgl3.opengl.GL11.GL_BYTE),
+                (unsigned ? org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE : org.lwjgl.opengl.GL11.GL_BYTE),
                 stride,
                 MemoryUtil.getAddress(pPointer));
     }

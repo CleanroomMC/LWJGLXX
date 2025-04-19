@@ -55,100 +55,100 @@ public class EXTFramebufferObject {
     public static final int GL_STENCIL_INDEX8_EXT = (int) 36168;
 
     public static void glBindFramebufferEXT(int target, int framebuffer) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glBindFramebufferEXT(target, framebuffer);
+        org.lwjgl.opengl.EXTFramebufferObject.glBindFramebufferEXT(target, framebuffer);
     }
 
     public static void glBindRenderbufferEXT(int target, int renderbuffer) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glBindRenderbufferEXT(target, renderbuffer);
+        org.lwjgl.opengl.EXTFramebufferObject.glBindRenderbufferEXT(target, renderbuffer);
     }
 
     public static int glCheckFramebufferStatusEXT(int target) {
-        return org.lwjgl3.opengl.EXTFramebufferObject.glCheckFramebufferStatusEXT(target);
+        return org.lwjgl.opengl.EXTFramebufferObject.glCheckFramebufferStatusEXT(target);
     }
 
     public static void glDeleteFramebuffersEXT(int framebuffer) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glDeleteFramebuffersEXT(framebuffer);
+        org.lwjgl.opengl.EXTFramebufferObject.glDeleteFramebuffersEXT(framebuffer);
     }
 
     public static void glDeleteFramebuffersEXT(java.nio.IntBuffer framebuffers) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glDeleteFramebuffersEXT(framebuffers);
+        org.lwjgl.opengl.EXTFramebufferObject.glDeleteFramebuffersEXT(framebuffers);
     }
 
     public static void glDeleteRenderbuffersEXT(int renderbuffer) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glDeleteRenderbuffersEXT(renderbuffer);
+        org.lwjgl.opengl.EXTFramebufferObject.glDeleteRenderbuffersEXT(renderbuffer);
     }
 
     public static void glDeleteRenderbuffersEXT(java.nio.IntBuffer renderbuffers) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glDeleteRenderbuffersEXT(renderbuffers);
+        org.lwjgl.opengl.EXTFramebufferObject.glDeleteRenderbuffersEXT(renderbuffers);
     }
 
     public static void glFramebufferRenderbufferEXT(int target, int attachment, int renderbuffertarget,
             int renderbuffer) {
-        org.lwjgl3.opengl.EXTFramebufferObject
+        org.lwjgl.opengl.EXTFramebufferObject
                 .glFramebufferRenderbufferEXT(target, attachment, renderbuffertarget, renderbuffer);
     }
 
     public static void glFramebufferTexture1DEXT(int target, int attachment, int textarget, int texture, int level) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glFramebufferTexture1DEXT(target, attachment, textarget, texture, level);
+        org.lwjgl.opengl.EXTFramebufferObject.glFramebufferTexture1DEXT(target, attachment, textarget, texture, level);
     }
 
     public static void glFramebufferTexture2DEXT(int target, int attachment, int textarget, int texture, int level) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glFramebufferTexture2DEXT(target, attachment, textarget, texture, level);
+        org.lwjgl.opengl.EXTFramebufferObject.glFramebufferTexture2DEXT(target, attachment, textarget, texture, level);
     }
 
     public static void glFramebufferTexture3DEXT(int target, int attachment, int textarget, int texture, int level,
             int zoffset) {
-        org.lwjgl3.opengl.EXTFramebufferObject
+        org.lwjgl.opengl.EXTFramebufferObject
                 .glFramebufferTexture3DEXT(target, attachment, textarget, texture, level, zoffset);
     }
 
     public static int glGenFramebuffersEXT() {
-        return org.lwjgl3.opengl.EXTFramebufferObject.glGenFramebuffersEXT();
+        return org.lwjgl.opengl.EXTFramebufferObject.glGenFramebuffersEXT();
     }
 
     public static void glGenFramebuffersEXT(java.nio.IntBuffer framebuffers) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glGenFramebuffersEXT(framebuffers);
+        org.lwjgl.opengl.EXTFramebufferObject.glGenFramebuffersEXT(framebuffers);
     }
 
     public static int glGenRenderbuffersEXT() {
-        return org.lwjgl3.opengl.EXTFramebufferObject.glGenRenderbuffersEXT();
+        return org.lwjgl.opengl.EXTFramebufferObject.glGenRenderbuffersEXT();
     }
 
     public static void glGenRenderbuffersEXT(java.nio.IntBuffer renderbuffers) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glGenRenderbuffersEXT(renderbuffers);
+        org.lwjgl.opengl.EXTFramebufferObject.glGenRenderbuffersEXT(renderbuffers);
     }
 
     public static void glGenerateMipmapEXT(int target) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glGenerateMipmapEXT(target);
+        org.lwjgl.opengl.EXTFramebufferObject.glGenerateMipmapEXT(target);
     }
 
     public static void glGetFramebufferAttachmentParameterEXT(int target, int attachment, int pname,
             java.nio.IntBuffer params) {
-        org.lwjgl3.opengl.EXTFramebufferObject
+        org.lwjgl.opengl.EXTFramebufferObject
                 .glGetFramebufferAttachmentParameterivEXT(target, attachment, pname, params);
     }
 
     public static int glGetFramebufferAttachmentParameteriEXT(int target, int attachment, int pname) {
-        return org.lwjgl3.opengl.EXTFramebufferObject.glGetFramebufferAttachmentParameteriEXT(target, attachment, pname);
+        return org.lwjgl.opengl.EXTFramebufferObject.glGetFramebufferAttachmentParameteriEXT(target, attachment, pname);
     }
 
     public static void glGetRenderbufferParameterEXT(int target, int pname, java.nio.IntBuffer params) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glGetRenderbufferParameterivEXT(target, pname, params);
+        org.lwjgl.opengl.EXTFramebufferObject.glGetRenderbufferParameterivEXT(target, pname, params);
     }
 
     public static int glGetRenderbufferParameteriEXT(int target, int pname) {
-        return org.lwjgl3.opengl.EXTFramebufferObject.glGetRenderbufferParameteriEXT(target, pname);
+        return org.lwjgl.opengl.EXTFramebufferObject.glGetRenderbufferParameteriEXT(target, pname);
     }
 
     public static boolean glIsFramebufferEXT(int framebuffer) {
-        return org.lwjgl3.opengl.EXTFramebufferObject.glIsFramebufferEXT(framebuffer);
+        return org.lwjgl.opengl.EXTFramebufferObject.glIsFramebufferEXT(framebuffer);
     }
 
     public static boolean glIsRenderbufferEXT(int renderbuffer) {
-        return org.lwjgl3.opengl.EXTFramebufferObject.glIsRenderbufferEXT(renderbuffer);
+        return org.lwjgl.opengl.EXTFramebufferObject.glIsRenderbufferEXT(renderbuffer);
     }
 
     public static void glRenderbufferStorageEXT(int target, int internalformat, int width, int height) {
-        org.lwjgl3.opengl.EXTFramebufferObject.glRenderbufferStorageEXT(target, internalformat, width, height);
+        org.lwjgl.opengl.EXTFramebufferObject.glRenderbufferStorageEXT(target, internalformat, width, height);
     }
 }

@@ -12,32 +12,32 @@ public class KHRRobustness {
     public static final int GL_UNKNOWN_CONTEXT_RESET = (int) 33365;
 
     public static int glGetGraphicsResetStatus() {
-        return org.lwjgl3.opengl.KHRRobustness.glGetGraphicsResetStatus();
+        return org.lwjgl.opengl.KHRRobustness.glGetGraphicsResetStatus();
     }
 
     public static void glReadnPixels(int x, int y, int width, int height, int format, int type, int pixels_bufSize,
             long pixels_buffer_offset) {
-        org.lwjgl3.opengl.KHRRobustness
+        org.lwjgl.opengl.KHRRobustness
                 .glReadnPixels(x, y, width, height, format, type, pixels_bufSize, pixels_buffer_offset);
     }
 
     public static void glReadnPixels(int x, int y, int width, int height, int format, int type,
             java.nio.ByteBuffer pixels) {
-        org.lwjgl3.opengl.KHRRobustness.glReadnPixels(x, y, width, height, format, type, pixels);
+        org.lwjgl.opengl.KHRRobustness.glReadnPixels(x, y, width, height, format, type, pixels);
     }
 
     public static void glReadnPixels(int x, int y, int width, int height, int format, int type,
             java.nio.FloatBuffer pixels) {
-        org.lwjgl3.opengl.KHRRobustness.glReadnPixels(x, y, width, height, format, type, pixels);
+        org.lwjgl.opengl.KHRRobustness.glReadnPixels(x, y, width, height, format, type, pixels);
     }
 
     public static void glReadnPixels(int x, int y, int width, int height, int format, int type,
             java.nio.IntBuffer pixels) {
-        org.lwjgl3.opengl.KHRRobustness.glReadnPixels(x, y, width, height, format, type, pixels);
+        org.lwjgl.opengl.KHRRobustness.glReadnPixels(x, y, width, height, format, type, pixels);
     }
 
     public static void glReadnPixels(int x, int y, int width, int height, int format, int type,
             java.nio.ShortBuffer pixels) {
-        org.lwjgl3.opengl.KHRRobustness.glReadnPixels(x, y, width, height, format, type, pixels);
+        org.lwjgl.opengl.KHRRobustness.glReadnPixels(x, y, width, height, format, type, pixels);
     }
 }

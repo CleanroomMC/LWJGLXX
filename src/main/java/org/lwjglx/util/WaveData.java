@@ -28,7 +28,7 @@ import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 
-import org.lwjgl3.openal.AL11;
+import org.lwjgl.openal.AL11;
 import org.lwjglx.LWJGLUtil;
 
 // import com.sun.media.sound.WaveFileReader;

@@ -1,6 +1,6 @@
 package org.lwjglx;
 
-import static org.lwjgl3.glfw.GLFW.glfwInit;
+import static org.lwjgl.glfw.GLFW.glfwInit;
 
 import java.awt.*;
 import java.net.URI;
@@ -10,9 +10,9 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 import net.minecraftforge.common.ForgeEarlyConfig;
-import org.lwjgl3.Version;
-import org.lwjgl3.glfw.GLFW;
-import org.lwjgl3.system.*;
+import org.lwjgl.Version;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.system.*;
 import org.lwjglx.opengl.Display;
 
 public class Sys {
@@ -24,7 +24,7 @@ public class Sys {
             Toolkit.getDefaultToolkit();
         }
         if (Objects.requireNonNullElse(System.getenv("XDG_SESSION_TYPE"),"").toLowerCase().startsWith("wayland")) {
-            if (ForgeEarlyConfig.FORCE_X11) {
+            if (!ForgeEarlyConfig.FORCE_WAYLAND) {
                 GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_X11);
             } else {
                 GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_WAYLAND);

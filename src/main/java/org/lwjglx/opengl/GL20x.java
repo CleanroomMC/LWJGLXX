@@ -4,11 +4,11 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.nio.ShortBuffer;
 
-import org.lwjgl3.BufferUtils;
-import org.lwjgl3.PointerBuffer;
-import org.lwjgl3.opengl.GL11;
-import org.lwjgl3.opengl.GL20;
-import org.lwjgl3.system.MemoryUtil;
+import org.lwjgl.BufferUtils;
+import org.lwjgl.PointerBuffer;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL20;
+import org.lwjgl.system.MemoryUtil;
 
 public class GL20x {
 
@@ -52,6 +52,6 @@ public class GL20x {
 
         strings.put(0, string);
         lengths.put(0, new String(string.array()).length()); // source.length());
-        org.lwjgl3.opengl.GL20.glShaderSource(shader, strings, lengths);
+        org.lwjgl.opengl.GL20.glShaderSource(shader, strings, lengths);
     }
 }

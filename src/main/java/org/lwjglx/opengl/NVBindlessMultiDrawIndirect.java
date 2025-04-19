@@ -4,7 +4,7 @@ public class NVBindlessMultiDrawIndirect {
 
     public static void glMultiDrawArraysIndirectBindlessNV(int mode, long indirect_buffer_offset, int drawCount,
             int stride, int vertexBufferCount) {
-        org.lwjgl3.opengl.NVBindlessMultiDrawIndirect.glMultiDrawArraysIndirectBindlessNV(
+        org.lwjgl.opengl.NVBindlessMultiDrawIndirect.glMultiDrawArraysIndirectBindlessNV(
                 mode,
                 indirect_buffer_offset,
                 drawCount,
@@ -14,13 +14,13 @@ public class NVBindlessMultiDrawIndirect {
 
     public static void glMultiDrawArraysIndirectBindlessNV(int mode, java.nio.ByteBuffer indirect, int drawCount,
             int stride, int vertexBufferCount) {
-        org.lwjgl3.opengl.NVBindlessMultiDrawIndirect
+        org.lwjgl.opengl.NVBindlessMultiDrawIndirect
                 .glMultiDrawArraysIndirectBindlessNV(mode, indirect, drawCount, stride, vertexBufferCount);
     }
 
     public static void glMultiDrawElementsIndirectBindlessNV(int mode, int type, long indirect_buffer_offset,
             int drawCount, int stride, int vertexBufferCount) {
-        org.lwjgl3.opengl.NVBindlessMultiDrawIndirect.glMultiDrawElementsIndirectBindlessNV(
+        org.lwjgl.opengl.NVBindlessMultiDrawIndirect.glMultiDrawElementsIndirectBindlessNV(
                 mode,
                 type,
                 indirect_buffer_offset,
@@ -31,7 +31,7 @@ public class NVBindlessMultiDrawIndirect {
 
     public static void glMultiDrawElementsIndirectBindlessNV(int mode, int type, java.nio.ByteBuffer indirect,
             int drawCount, int stride, int vertexBufferCount) {
-        org.lwjgl3.opengl.NVBindlessMultiDrawIndirect
+        org.lwjgl.opengl.NVBindlessMultiDrawIndirect
                 .glMultiDrawElementsIndirectBindlessNV(mode, type, indirect, drawCount, stride, vertexBufferCount);
     }
 }

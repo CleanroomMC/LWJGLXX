@@ -14,14 +14,14 @@ public class NVExplicitMultisample {
     public static final int GL_UNSIGNED_INT_SAMPLER_RENDERBUFFER_NV = (int) 36440;
 
     public static void glGetMultisampleNV(int pname, int index, java.nio.FloatBuffer val) {
-        org.lwjgl3.opengl.NVExplicitMultisample.glGetMultisamplefvNV(pname, index, val);
+        org.lwjgl.opengl.NVExplicitMultisample.glGetMultisamplefvNV(pname, index, val);
     }
 
     public static void glSampleMaskIndexedNV(int index, int mask) {
-        org.lwjgl3.opengl.NVExplicitMultisample.glSampleMaskIndexedNV(index, mask);
+        org.lwjgl.opengl.NVExplicitMultisample.glSampleMaskIndexedNV(index, mask);
     }
 
     public static void glTexRenderbufferNV(int target, int renderbuffer) {
-        org.lwjgl3.opengl.NVExplicitMultisample.glTexRenderbufferNV(target, renderbuffer);
+        org.lwjgl.opengl.NVExplicitMultisample.glTexRenderbufferNV(target, renderbuffer);
     }
 }

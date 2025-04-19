@@ -6,11 +6,11 @@ import net.minecraftforge.common.ForgeEarlyConfig;
 import org.lwjglx.LWJGLException;
 import org.lwjglx.input.*;
 import org.lwjglx.util.Rectangle;
-import org.lwjgl3.PointerBuffer;
-import org.lwjgl3.glfw.GLFW;
-import org.lwjgl3.glfw.*;
-import org.lwjgl3.opengl.GL;
-import org.lwjgl3.opengl.GL11;
+import org.lwjgl.PointerBuffer;
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.*;
+import org.lwjgl.opengl.GL;
+import org.lwjgl.opengl.GL11;
 import org.lwjglx.BufferUtils;
 import org.lwjglx.Sys;
 import oshi.SystemInfo;
@@ -21,8 +21,8 @@ import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 import java.util.*;
 
-import static org.lwjgl3.glfw.GLFW.*;
-import static org.lwjgl3.system.MemoryUtil.NULL;
+import static org.lwjgl.glfw.GLFW.*;
+import static org.lwjgl.system.MemoryUtil.NULL;
 
 public class Display {
 
@@ -155,7 +155,7 @@ public class Display {
             glfwWindowHint(GLFW_POSITION_Y, (desktopDisplayMode.getHeight() - mode.getHeight()) / 2);
         }
 
-        if (org.lwjgl3.system.Platform.get() == org.lwjgl3.system.Platform.LINUX || org.lwjgl3.system.Platform.get() == org.lwjgl3.system.Platform.FREEBSD){
+        if (org.lwjgl.system.Platform.get() == org.lwjgl.system.Platform.LINUX || org.lwjgl.system.Platform.get() == org.lwjgl.system.Platform.FREEBSD){
             SystemInfo si = new SystemInfo();
             if (si.getHardware().getGraphicsCards().stream().anyMatch(graphicsCard -> graphicsCard.getVendor().startsWith("NVIDIA"))) {
                 com.sun.jna.platform.unix.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
@@ -167,7 +167,7 @@ public class Display {
             throw new IllegalStateException("Failed to create Display window");
         }
 
-        if (org.lwjgl3.glfw.GLFW.glfwRawMouseMotionSupported() && ForgeEarlyConfig.RAW_INPUT) {
+        if (org.lwjgl.glfw.GLFW.glfwRawMouseMotionSupported() && ForgeEarlyConfig.RAW_INPUT) {
             GLFW.glfwSetInputMode(Window.handle, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
         }
 
@@ -538,7 +538,7 @@ public class Display {
 
     public static void setTitle(String title) {
         if (getWindow() != 0) {
-            org.lwjgl3.glfw.GLFW.glfwSetWindowTitle(Window.handle, title);
+            org.lwjgl.glfw.GLFW.glfwSetWindowTitle(Window.handle, title);
         }
         windowTitle = title;
     }
@@ -563,7 +563,7 @@ public class Display {
         GLFWImage.Buffer glfwImages = GLFWImage.calloc(icons.length);
         ByteBuffer[] nativeBuffers = new ByteBuffer[icons.length];
         for (int icon = 0; icon < icons.length; icon++) {
-            nativeBuffers[icon] = org.lwjgl3.BufferUtils.createByteBuffer(icons[icon].capacity());
+            nativeBuffers[icon] = org.lwjgl.BufferUtils.createByteBuffer(icons[icon].capacity());
             nativeBuffers[icon].put(icons[icon]);
             nativeBuffers[icon].flip();
             int dimension = (int) Math.sqrt(nativeBuffers[icon].limit() / 4D);

@@ -12,38 +12,38 @@ public class NVPixelDataRange {
     public static final int GL_WRITE_PIXEL_DATA_RANGE_POINTER_NV = (int) 34940;
 
     public static void glFlushPixelDataRangeNV(int target) {
-        org.lwjgl3.opengl.NVPixelDataRange.glFlushPixelDataRangeNV(target);
+        org.lwjgl.opengl.NVPixelDataRange.glFlushPixelDataRangeNV(target);
     }
 
     public static void glPixelDataRangeNV(int target, java.nio.ByteBuffer data) {
-        org.lwjgl3.opengl.NVPixelDataRange.glPixelDataRangeNV(target, data);
+        org.lwjgl.opengl.NVPixelDataRange.glPixelDataRangeNV(target, data);
     }
 
     public static void glPixelDataRangeNV(int target, java.nio.DoubleBuffer data) {
         final java.nio.ByteBuffer wrappedArg1 = BufferCasts.toByteBuffer(data);
 
-        org.lwjgl3.opengl.NVPixelDataRange.glPixelDataRangeNV(target, wrappedArg1);
+        org.lwjgl.opengl.NVPixelDataRange.glPixelDataRangeNV(target, wrappedArg1);
         BufferCasts.updateBuffer(data, wrappedArg1);
     }
 
     public static void glPixelDataRangeNV(int target, java.nio.FloatBuffer data) {
         final java.nio.ByteBuffer wrappedArg1 = BufferCasts.toByteBuffer(data);
 
-        org.lwjgl3.opengl.NVPixelDataRange.glPixelDataRangeNV(target, wrappedArg1);
+        org.lwjgl.opengl.NVPixelDataRange.glPixelDataRangeNV(target, wrappedArg1);
         BufferCasts.updateBuffer(data, wrappedArg1);
     }
 
     public static void glPixelDataRangeNV(int target, java.nio.IntBuffer data) {
         final java.nio.ByteBuffer wrappedArg1 = BufferCasts.toByteBuffer(data);
 
-        org.lwjgl3.opengl.NVPixelDataRange.glPixelDataRangeNV(target, wrappedArg1);
+        org.lwjgl.opengl.NVPixelDataRange.glPixelDataRangeNV(target, wrappedArg1);
         BufferCasts.updateBuffer(data, wrappedArg1);
     }
 
     public static void glPixelDataRangeNV(int target, java.nio.ShortBuffer data) {
         final java.nio.ByteBuffer wrappedArg1 = BufferCasts.toByteBuffer(data);
 
-        org.lwjgl3.opengl.NVPixelDataRange.glPixelDataRangeNV(target, wrappedArg1);
+        org.lwjgl.opengl.NVPixelDataRange.glPixelDataRangeNV(target, wrappedArg1);
         BufferCasts.updateBuffer(data, wrappedArg1);
     }
 }

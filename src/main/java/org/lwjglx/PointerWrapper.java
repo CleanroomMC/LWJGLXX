@@ -15,7 +15,7 @@
  */
 package org.lwjglx;
 
-import org.lwjgl3.system.Pointer;
+import org.lwjgl.system.Pointer;
 
 /**
  * A common interface for classes that wrap pointer addresses.

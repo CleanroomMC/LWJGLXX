@@ -36,6 +36,6 @@ public class ARBTessellationShader {
     public static final int GL_UNIFORM_BLOCK_REFERENCED_BY_TESS_EVALUATION_SHADER = (int) 34033;
 
     public static void glPatchParameteri(int pname, int value) {
-        org.lwjgl3.opengl.ARBTessellationShader.glPatchParameteri(pname, value);
+        org.lwjgl.opengl.ARBTessellationShader.glPatchParameteri(pname, value);
     }
 }

@@ -57,7 +57,7 @@ public class Quaternion extends Vector implements ReadableVector4f {
 
     /*
      * (non-Javadoc)
-     * @see org.lwjgl3.util.vector.WritableVector2f#set(float, float)
+     * @see org.lwjgl.util.vector.WritableVector2f#set(float, float)
      */
     public void set(float x, float y) {
         this.x = x;
@@ -66,7 +66,7 @@ public class Quaternion extends Vector implements ReadableVector4f {
 
     /*
      * (non-Javadoc)
-     * @see org.lwjgl3.util.vector.WritableVector3f#set(float, float, float)
+     * @see org.lwjgl.util.vector.WritableVector3f#set(float, float, float)
      */
     public void set(float x, float y, float z) {
         this.x = x;
@@ -76,7 +76,7 @@ public class Quaternion extends Vector implements ReadableVector4f {
 
     /*
      * (non-Javadoc)
-     * @see org.lwjgl3.util.vector.WritableVector4f#set(float, float, float, float)
+     * @see org.lwjgl.util.vector.WritableVector4f#set(float, float, float, float)
      */
     public void set(float x, float y, float z, float w) {
         this.x = x;
@@ -202,7 +202,7 @@ public class Quaternion extends Vector implements ReadableVector4f {
 
     /*
      * (non-Javadoc)
-     * @see org.lwjgl3.util.vector.Vector#load(java.nio.FloatBuffer)
+     * @see org.lwjgl.util.vector.Vector#load(java.nio.FloatBuffer)
      */
     public Vector load(FloatBuffer buf) {
         x = buf.get();
@@ -214,7 +214,7 @@ public class Quaternion extends Vector implements ReadableVector4f {
 
     /*
      * (non-Javadoc)
-     * @see org.lwjgl3.vector.Vector#scale(float)
+     * @see org.lwjgl.vector.Vector#scale(float)
      */
     public Vector scale(float scale) {
         return scale(scale, this, this);
@@ -239,7 +239,7 @@ public class Quaternion extends Vector implements ReadableVector4f {
 
     /*
      * (non-Javadoc)
-     * @see org.lwjgl3.util.vector.ReadableVector#store(java.nio.FloatBuffer)
+     * @see org.lwjgl.util.vector.ReadableVector#store(java.nio.FloatBuffer)
      */
     public Vector store(FloatBuffer buf) {
         buf.put(x);
@@ -293,7 +293,7 @@ public class Quaternion extends Vector implements ReadableVector4f {
 
     /*
      * (Overrides)
-     * @see org.lwjgl3.vector.ReadableVector3f#getZ()
+     * @see org.lwjgl.vector.ReadableVector3f#getZ()
      */
     public float getZ() {
         return z;
@@ -310,7 +310,7 @@ public class Quaternion extends Vector implements ReadableVector4f {
 
     /*
      * (Overrides)
-     * @see org.lwjgl3.vector.ReadableVector3f#getW()
+     * @see org.lwjgl.vector.ReadableVector3f#getW()
      */
     public float getW() {
         return w;

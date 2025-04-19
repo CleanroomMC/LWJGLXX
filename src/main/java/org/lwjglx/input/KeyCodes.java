@@ -1,6 +1,6 @@
 package org.lwjglx.input;
 
-import org.lwjgl3.glfw.GLFW;
+import org.lwjgl.glfw.GLFW;
 
 public class KeyCodes {
 

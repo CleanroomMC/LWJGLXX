@@ -10,11 +10,11 @@ public class ARBMapBufferRange {
     public static final int GL_MAP_WRITE_BIT = (int) 2;
 
     public static void glFlushMappedBufferRange(int target, long offset, long length) {
-        org.lwjgl3.opengl.ARBMapBufferRange.glFlushMappedBufferRange(target, offset, length);
+        org.lwjgl.opengl.ARBMapBufferRange.glFlushMappedBufferRange(target, offset, length);
     }
 
     public static java.nio.ByteBuffer glMapBufferRange(int target, long offset, long length, int access,
             java.nio.ByteBuffer old_buffer) {
-        return org.lwjgl3.opengl.ARBMapBufferRange.glMapBufferRange(target, offset, length, access, old_buffer);
+        return org.lwjgl.opengl.ARBMapBufferRange.glMapBufferRange(target, offset, length, access, old_buffer);
     }
 }

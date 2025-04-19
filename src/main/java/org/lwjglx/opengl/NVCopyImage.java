@@ -4,7 +4,7 @@ public class NVCopyImage {
 
     public static void glCopyImageSubDataNV(int srcName, int srcTarget, int srcLevel, int srcX, int srcY, int srcZ,
             int dstName, int dstTarget, int dstLevel, int dstX, int dstY, int dstZ, int width, int height, int depth) {
-        org.lwjgl3.opengl.NVCopyImage.glCopyImageSubDataNV(
+        org.lwjgl.opengl.NVCopyImage.glCopyImageSubDataNV(
                 srcName,
                 srcTarget,
                 srcLevel,

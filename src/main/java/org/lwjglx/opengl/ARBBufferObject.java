@@ -1,6 +1,6 @@
 package org.lwjglx.opengl;
 
-import org.lwjgl3.opengl.ARBVertexBufferObject;
+import org.lwjgl.opengl.ARBVertexBufferObject;
 
 import java.nio.*;
 

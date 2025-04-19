@@ -15,12 +15,12 @@
  */
 package org.lwjglx.opengl;
 
-import static org.lwjgl3.glfw.GLFW.GLFW_FALSE;
-import static org.lwjgl3.glfw.GLFW.GLFW_VISIBLE;
-import static org.lwjgl3.glfw.GLFW.glfwWindowHint;
-import static org.lwjgl3.opengl.GL11.*;
+import static org.lwjgl.glfw.GLFW.GLFW_FALSE;
+import static org.lwjgl.glfw.GLFW.GLFW_VISIBLE;
+import static org.lwjgl.glfw.GLFW.glfwWindowHint;
+import static org.lwjgl.opengl.GL11.*;
 
-import org.lwjgl3.glfw.GLFW;
+import org.lwjgl.glfw.GLFW;
 import org.lwjglx.LWJGLException;
 import org.lwjglx.LWJGLUtil;
 import org.lwjglx.PointerBuffer;

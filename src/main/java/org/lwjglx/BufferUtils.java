@@ -135,36 +135,36 @@ public final class BufferUtils {
 
     /** Fill buffer with zeros from position to remaining */
     public static void zeroBuffer(ByteBuffer b) {
-        org.lwjgl3.BufferUtils.zeroBuffer(b);
+        org.lwjgl.BufferUtils.zeroBuffer(b);
     }
 
     /** Fill buffer with zeros from position to remaining */
     public static void zeroBuffer(ShortBuffer b) {
-        org.lwjgl3.BufferUtils.zeroBuffer(b);
+        org.lwjgl.BufferUtils.zeroBuffer(b);
     }
 
     /** Fill buffer with zeros from position to remaining */
     public static void zeroBuffer(CharBuffer b) {
-        org.lwjgl3.BufferUtils.zeroBuffer(b);
+        org.lwjgl.BufferUtils.zeroBuffer(b);
     }
 
     /** Fill buffer with zeros from position to remaining */
     public static void zeroBuffer(IntBuffer b) {
-        org.lwjgl3.BufferUtils.zeroBuffer(b);
+        org.lwjgl.BufferUtils.zeroBuffer(b);
     }
 
     /** Fill buffer with zeros from position to remaining */
     public static void zeroBuffer(FloatBuffer b) {
-        org.lwjgl3.BufferUtils.zeroBuffer(b);
+        org.lwjgl.BufferUtils.zeroBuffer(b);
     }
 
     /** Fill buffer with zeros from position to remaining */
     public static void zeroBuffer(LongBuffer b) {
-        org.lwjgl3.BufferUtils.zeroBuffer(b);
+        org.lwjgl.BufferUtils.zeroBuffer(b);
     }
 
     /** Fill buffer with zeros from position to remaining */
     public static void zeroBuffer(DoubleBuffer b) {
-        org.lwjgl3.BufferUtils.zeroBuffer(b);
+        org.lwjgl.BufferUtils.zeroBuffer(b);
     }
 }
