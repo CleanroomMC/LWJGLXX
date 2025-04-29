@@ -150,6 +150,8 @@ public class Display {
         glfwWindowHintString(GLFW_X11_CLASS_NAME, ForgeEarlyConfig.X11_CLASS_NAME);
         glfwWindowHintString(GLFW_COCOA_FRAME_NAME, ForgeEarlyConfig.COCOA_FRAME_NAME);
 
+        glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE); // request a non-hidpi framebuffer on Retina displays on MacOS
+
         if (ForgeEarlyConfig.WINDOW_CENTERED) {
             glfwWindowHint(GLFW_POSITION_X, (desktopDisplayMode.getWidth() - mode.getWidth()) / 2);
             glfwWindowHint(GLFW_POSITION_Y, (desktopDisplayMode.getHeight() - mode.getHeight()) / 2);
@@ -608,7 +610,7 @@ public class Display {
                 return monitorInfo;
             }
         }
-        // If the center of the screen doesn't contains in any monitors, try to look by intersect area
+        // If the center of the screen doesn't contain in any monitors, try to look by intersect area
         Rectangle windowBounds = new Rectangle(savedX[0], savedY[0], savedW[0], savedH[0]);
         Optional<PositionedGLFWVidMode> targetMonitor = monitorInfos.stream()
                 .filter(
