@@ -150,7 +150,7 @@ public class Display {
         glfwWindowHintString(GLFW_X11_CLASS_NAME, ForgeEarlyConfig.X11_CLASS_NAME);
         glfwWindowHintString(GLFW_COCOA_FRAME_NAME, ForgeEarlyConfig.COCOA_FRAME_NAME);
 
-        glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, GLFW_FALSE); // request a non-hidpi framebuffer on Retina displays on MacOS
+        glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, ForgeEarlyConfig.COCOA_RETINA_FRAMEBUFFER ? GLFW_TRUE : GLFW_FALSE); // request a non-hidpi framebuffer on Retina displays on MacOS
 
         if (ForgeEarlyConfig.WINDOW_CENTERED) {
             glfwWindowHint(GLFW_POSITION_X, (desktopDisplayMode.getWidth() - mode.getWidth()) / 2);
