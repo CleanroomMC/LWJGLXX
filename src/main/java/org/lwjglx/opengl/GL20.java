@@ -1,5 +1,6 @@
 package org.lwjglx.opengl;
 
+import org.lwjgl.BufferUtils;
 import org.lwjglx.MemoryUtil;
 import org.lwjglx.lwjgl3ify.BufferCasts;
 
@@ -153,7 +154,9 @@ public class GL20 {
     }
 
     public static String glGetActiveUniform(int program, int index, int maxLength) {
-        return org.lwjgl.opengl.GL31C.glGetActiveUniformName(program, index, maxLength);
+        java.nio.IntBuffer sizeBuffer = BufferUtils.createIntBuffer(1);
+        java.nio.IntBuffer typeBuffer = BufferUtils.createIntBuffer(1);
+        return org.lwjgl.opengl.GL20.glGetActiveUniform(program, index, maxLength, sizeBuffer, typeBuffer);
     }
 
     public static void glGetActiveUniform(int program, int index, java.nio.IntBuffer length, java.nio.IntBuffer size,
