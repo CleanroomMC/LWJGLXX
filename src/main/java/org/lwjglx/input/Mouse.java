@@ -242,7 +242,7 @@ public class Mouse {
     }
 
     public static int getEventDWheel() {
-        return wheelEvents[queue.getCurrentPos()];
+        return wheelEvents[queue.getCurrentPos()] * 120;
     }
 
     public static int getX() {
@@ -268,7 +268,7 @@ public class Mouse {
     public static int getDWheel() {
         int value = dwheel;
         dwheel = 0;
-        return value;
+        return value * 120;
     }
 
     public static int getButtonCount() {

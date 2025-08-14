@@ -89,4 +89,9 @@ public class KHRDebug {
     public static void glPushDebugGroup(int source, int id, java.nio.ByteBuffer message) {
         org.lwjgl.opengl.KHRDebug.glPushDebugGroup(source, id, message);
     }
+
+    public static void glDebugMessageCallback(KHRDebugCallback callback) {
+        GL43.glDebugMessageCallback(callback);
+    }
+
 }

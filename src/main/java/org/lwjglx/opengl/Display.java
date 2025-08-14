@@ -668,7 +668,7 @@ public class Display {
                     vidMode.refreshRate());
             if (displayCreated) {
                 Minecraft.func_71410_x()
-                        .func_71370_a(vidMode.width(), vidMode.height());
+                        .func_71370_a(845, 480);
             }
         } else {
             glfwSetWindowSize(window, savedW[0], savedH[0]);
