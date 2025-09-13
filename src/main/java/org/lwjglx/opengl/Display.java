@@ -1,6 +1,5 @@
 package org.lwjglx.opengl;
 
-import com.sun.jna.Platform;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.ForgeEarlyConfig;
 import org.lwjglx.LWJGLException;
@@ -668,7 +667,7 @@ public class Display {
                     vidMode.refreshRate());
             if (displayCreated) {
                 Minecraft.func_71410_x()
-                        .func_71370_a(845, 480);
+                        .func_71370_a(vidMode.width(), vidMode.height());
             }
         } else {
             glfwSetWindowSize(window, savedW[0], savedH[0]);
