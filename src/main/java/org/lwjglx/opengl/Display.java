@@ -2,6 +2,8 @@ package org.lwjglx.opengl;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.ForgeEarlyConfig;
+import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.ConfigManager;
 import org.lwjglx.LWJGLException;
 import org.lwjglx.input.*;
 import org.lwjglx.util.Rectangle;
@@ -120,52 +122,103 @@ public class Display {
             return;
         }
 
-        glfwDefaultWindowHints();
-        glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
-        glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
-        glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+        int versionMajor = ForgeEarlyConfig.OPENGL_VERSION_MAJOR;
+        int versionMinor = ForgeEarlyConfig.OPENGL_VERSION_MINOR;
 
-        glfwWindowHint(GLFW_MAXIMIZED, ForgeEarlyConfig.WINDOW_START_MAXIMIZED ? GLFW_TRUE : GLFW_FALSE);
-        glfwWindowHint(GLFW_FOCUSED, ForgeEarlyConfig.WINDOW_START_FOCUSED ? GLFW_TRUE : GLFW_FALSE);
-        displayFocused = ForgeEarlyConfig.WINDOW_START_FOCUSED;
-        glfwWindowHint(GLFW_ICONIFIED, ForgeEarlyConfig.WINDOW_START_ICONIFIED ? GLFW_TRUE : GLFW_FALSE);
-        displayVisible = !ForgeEarlyConfig.WINDOW_START_ICONIFIED;
-        glfwWindowHint(GLFW_DECORATED, ForgeEarlyConfig.WINDOW_DECORATED ? GLFW_TRUE : GLFW_FALSE);
-
-        displayX = (desktopDisplayMode.getWidth() - mode.getWidth()) / 2;
-        displayY = (desktopDisplayMode.getHeight() - mode.getHeight()) / 2;
-        glfwWindowHint(GLFW_POSITION_X, displayX);
-        glfwWindowHint(GLFW_POSITION_Y, displayY);
-        glfwWindowHint(GLFW_REFRESH_RATE, desktopDisplayMode.getFrequency());
-
-        glfwWindowHint(GLFW_SRGB_CAPABLE, ForgeEarlyConfig.OPENGL_SRGB_CONTEXT ? GLFW_TRUE : GLFW_FALSE);
-        glfwWindowHint(GLFW_DOUBLEBUFFER, ForgeEarlyConfig.OPENGL_DOUBLEBUFFER ? GLFW_TRUE : GLFW_FALSE);
-        glfwWindowHint(GLFW_CONTEXT_NO_ERROR, ForgeEarlyConfig.OPENGL_CONTEXT_NO_ERROR ? GLFW_TRUE : GLFW_FALSE);
-        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, ForgeEarlyConfig.OPENGL_DEBUG_CONTEXT ? GLFW_TRUE : GLFW_FALSE);
-        glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, ForgeEarlyConfig.OPENGL_DEBUG_CONTEXT ? GLFW_TRUE : GLFW_FALSE);
-        glfwWindowHint(GLFW_DECORATED, ForgeEarlyConfig.DECORATED ? GLFW_TRUE : GLFW_FALSE);
-
-        glfwWindowHintString(GLFW_X11_CLASS_NAME, ForgeEarlyConfig.X11_CLASS_NAME);
-        glfwWindowHintString(GLFW_COCOA_FRAME_NAME, ForgeEarlyConfig.COCOA_FRAME_NAME);
-
-        glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, ForgeEarlyConfig.COCOA_RETINA_FRAMEBUFFER ? GLFW_TRUE : GLFW_FALSE); // request a non-hidpi framebuffer on Retina displays on MacOS
-
-        if (ForgeEarlyConfig.WINDOW_CENTERED) {
-            glfwWindowHint(GLFW_POSITION_X, (desktopDisplayMode.getWidth() - mode.getWidth()) / 2);
-            glfwWindowHint(GLFW_POSITION_Y, (desktopDisplayMode.getHeight() - mode.getHeight()) / 2);
-        }
-
-        if (org.lwjgl.system.Platform.get() == org.lwjgl.system.Platform.LINUX || org.lwjgl.system.Platform.get() == org.lwjgl.system.Platform.FREEBSD){
-            SystemInfo si = new SystemInfo();
-            if (si.getHardware().getGraphicsCards().stream().anyMatch(graphicsCard -> graphicsCard.getVendor().startsWith("NVIDIA"))) {
-                com.sun.jna.platform.unix.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
+        if (versionMajor == 1) {
+            // use at least GL21
+            versionMajor = 2;
+            versionMinor = 1;
+        } else if (versionMajor == 2) {
+            // use at least GL21
+            if (versionMinor != 1) {
+                versionMinor = 1;
             }
+        } else if (versionMajor == 3) {
+            if (versionMinor < 0) {
+                versionMinor = 0;
+            } else if (versionMinor > 3) {
+                versionMinor = 3;
+            }
+        } else if (versionMajor == 4) {
+            if (versionMinor < 0) {
+                versionMinor = 0;
+            } else if (versionMinor > 6) {
+                versionMinor = 6;
+            }
+        } else if (versionMajor < 1) {
+            versionMajor = 2;
+            versionMinor = 1;
+        } else {
+            versionMajor = 4;
+            versionMinor = 6;
         }
 
-        Window.handle = glfwCreateWindow(mode.getWidth(), mode.getHeight(), windowTitle, NULL, NULL);
-        if (Window.handle == 0L) {
-            throw new IllegalStateException("Failed to create Display window");
+        // try OpenGL versions one by one to find the best fit one
+        while (true) {
+            glfwDefaultWindowHints();
+            glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
+            glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, versionMajor);
+            glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, versionMinor);
+
+            glfwWindowHint(GLFW_MAXIMIZED, ForgeEarlyConfig.WINDOW_START_MAXIMIZED ? GLFW_TRUE : GLFW_FALSE);
+            glfwWindowHint(GLFW_FOCUSED, ForgeEarlyConfig.WINDOW_START_FOCUSED ? GLFW_TRUE : GLFW_FALSE);
+            displayFocused = ForgeEarlyConfig.WINDOW_START_FOCUSED;
+            glfwWindowHint(GLFW_ICONIFIED, ForgeEarlyConfig.WINDOW_START_ICONIFIED ? GLFW_TRUE : GLFW_FALSE);
+            displayVisible = !ForgeEarlyConfig.WINDOW_START_ICONIFIED;
+            glfwWindowHint(GLFW_DECORATED, ForgeEarlyConfig.WINDOW_DECORATED ? GLFW_TRUE : GLFW_FALSE);
+
+            displayX = (desktopDisplayMode.getWidth() - mode.getWidth()) / 2;
+            displayY = (desktopDisplayMode.getHeight() - mode.getHeight()) / 2;
+            glfwWindowHint(GLFW_POSITION_X, displayX);
+            glfwWindowHint(GLFW_POSITION_Y, displayY);
+            glfwWindowHint(GLFW_REFRESH_RATE, desktopDisplayMode.getFrequency());
+
+            glfwWindowHint(GLFW_SRGB_CAPABLE, ForgeEarlyConfig.OPENGL_SRGB_CONTEXT ? GLFW_TRUE : GLFW_FALSE);
+            glfwWindowHint(GLFW_DOUBLEBUFFER, ForgeEarlyConfig.OPENGL_DOUBLEBUFFER ? GLFW_TRUE : GLFW_FALSE);
+            glfwWindowHint(GLFW_CONTEXT_NO_ERROR, ForgeEarlyConfig.OPENGL_CONTEXT_NO_ERROR ? GLFW_TRUE : GLFW_FALSE);
+            glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, ForgeEarlyConfig.OPENGL_DEBUG_CONTEXT ? GLFW_TRUE : GLFW_FALSE);
+            glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, ForgeEarlyConfig.OPENGL_DEBUG_CONTEXT ? GLFW_TRUE : GLFW_FALSE);
+            glfwWindowHint(GLFW_DECORATED, ForgeEarlyConfig.DECORATED ? GLFW_TRUE : GLFW_FALSE);
+
+            glfwWindowHintString(GLFW_X11_CLASS_NAME, ForgeEarlyConfig.X11_CLASS_NAME);
+            glfwWindowHintString(GLFW_COCOA_FRAME_NAME, ForgeEarlyConfig.COCOA_FRAME_NAME);
+
+            glfwWindowHint(GLFW_COCOA_RETINA_FRAMEBUFFER, ForgeEarlyConfig.COCOA_RETINA_FRAMEBUFFER ? GLFW_TRUE : GLFW_FALSE); // request a non-hidpi framebuffer on Retina displays on MacOS
+
+            if (ForgeEarlyConfig.WINDOW_CENTERED) {
+                glfwWindowHint(GLFW_POSITION_X, (desktopDisplayMode.getWidth() - mode.getWidth()) / 2);
+                glfwWindowHint(GLFW_POSITION_Y, (desktopDisplayMode.getHeight() - mode.getHeight()) / 2);
+            }
+
+            if (org.lwjgl.system.Platform.get() == org.lwjgl.system.Platform.LINUX || org.lwjgl.system.Platform.get() == org.lwjgl.system.Platform.FREEBSD){
+                SystemInfo si = new SystemInfo();
+                if (si.getHardware().getGraphicsCards().stream().anyMatch(graphicsCard -> graphicsCard.getVendor().startsWith("NVIDIA"))) {
+                    com.sun.jna.platform.unix.LibC.INSTANCE.setenv("__GL_THREADED_OPTIMIZATIONS", "0", 1);
+                }
+            }
+
+            Window.handle = glfwCreateWindow(mode.getWidth(), mode.getHeight(), windowTitle, NULL, NULL);
+            // GL21 is the last version to try
+            if (Window.handle == 0L && versionMajor == 2 && versionMinor == 1) {
+                throw new IllegalStateException("Failed to create Display window.");
+            }
+
+            if (Window.handle == 0L) {
+                if (versionMinor - 1 < 0) {
+                    versionMajor--;
+                    if (versionMajor == 3) {
+                        versionMinor = 3;
+                    } else if (versionMajor == 2) {
+                        versionMinor = 1;
+                    }
+                } else {
+                    versionMinor--;
+                }
+            } else {
+                break;
+            }
         }
 
         if (org.lwjgl.glfw.GLFW.glfwRawMouseMotionSupported() && ForgeEarlyConfig.RAW_INPUT) {
@@ -382,6 +435,24 @@ public class Display {
         Window.windowSizeCallback.invoke(Window.handle, x[0], y[0]);
         GLFW.glfwGetFramebufferSize(Window.handle, x, y);
         Window.framebufferSizeCallback.invoke(Window.handle, x[0], y[0]);
+
+        ForgeEarlyConfig.OPENGL_VERSION_MAJOR = versionMajor;
+        ForgeEarlyConfig.OPENGL_VERSION_MINOR = versionMinor;
+
+        // extra calibration and write to local
+        String rawGLVersion = GL11.glGetString(GL11.GL_VERSION);
+        if (rawGLVersion != null) {
+            String[] parts = rawGLVersion.split("\\s+")[0].split("\\.");
+            if (parts.length >= 2) {
+                try {
+                    ForgeEarlyConfig.OPENGL_VERSION_MAJOR = Integer.parseInt(parts[0]);
+                    ForgeEarlyConfig.OPENGL_VERSION_MINOR = Integer.parseInt(parts[1]);
+                } catch (NumberFormatException ignored) {
+                }
+            }
+        }
+
+        ConfigManager.sync("forge", Config.Type.INSTANCE);
     }
 
     public static boolean isCreated() {
