@@ -2,7 +2,6 @@ package org.lwjglx.opengl;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.ForgeEarlyConfig;
-import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import org.lwjglx.LWJGLException;
 import org.lwjglx.input.*;
@@ -123,8 +122,12 @@ public class Display {
             return;
         }
 
+        System.out.println("[LWJGLXX] Creating Display");
+
         int versionMajor = ForgeEarlyConfig.OPENGL_VERSION_MAJOR;
         int versionMinor = ForgeEarlyConfig.OPENGL_VERSION_MINOR;
+
+        System.out.println("[LWJGLXX] Preferred OpenGL version from forge_early.cfg is " + versionMajor + "." + versionMinor);
 
         if (versionMajor == 1) {
             // use at least GL21
@@ -154,6 +157,8 @@ public class Display {
             versionMajor = 4;
             versionMinor = 6;
         }
+
+        System.out.println("[LWJGLXX] OpenGL version after validation is " + versionMajor + "." + versionMinor);
 
         // try OpenGL versions one by one to find the best fit one
         while (true) {
@@ -202,13 +207,16 @@ public class Display {
                 }
             }
 
+            System.out.println("[LWJGLXX] Attempting to create OpenGL " + versionMajor + "." + versionMinor + " context");
             Window.handle = glfwCreateWindow(mode.getWidth(), mode.getHeight(), windowTitle, NULL, NULL);
             // GL21 is the last version to try
             if (Window.handle == 0L && versionMajor == 2 && versionMinor == 1) {
+                System.out.println("[LWJGLXX] Failed to get OpenGL " + versionMajor + "." + versionMinor + " window handle");
                 throw new IllegalStateException("Failed to create Display window.");
             }
 
             if (Window.handle == 0L) {
+                System.out.println("[LWJGLXX] Failed to get OpenGL " + versionMajor + "." + versionMinor + " window handle");
                 if (versionMinor - 1 < 0) {
                     versionMajor--;
                     if (versionMajor == 3) {
@@ -220,6 +228,7 @@ public class Display {
                     versionMinor--;
                 }
             } else {
+                System.out.println("[LWJGLXX] Obtained OpenGL " + versionMajor + "." + versionMinor + " window handle");
                 break;
             }
         }
@@ -455,7 +464,10 @@ public class Display {
             }
         }
 
-        ConfigManager.sync("forge", Config.Type.INSTANCE);
+        System.out.println("[LWJGLXX] Current OpenGL version is " + versionMajor + "." + versionMinor);
+
+        ConfigManager.sync(ForgeEarlyConfig.class);
+        System.out.println("[LWJGLXX] Cached current OpenGL version to forge_early.cfg");
     }
 
     public static boolean isCreated() {
