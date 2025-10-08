@@ -88,6 +88,13 @@ public class Display {
         }
     }
 
+    private static boolean hasPixelFormat = false;
+    private static PixelFormat attachmentPixelFormat = null;
+    private static boolean hasContextAttribs = false;
+    private static ContextAttribs attachmentContextAttribs = null;
+    private static boolean hasDrawable = false;
+    private static Drawable attachmentDrawable = null;
+
     /**
      * Create the OpenGL context with the given minimum parameters. If isFullscreen() is true or if windowed context are
      * not supported on the platform, the display mode will be switched to the mode returned by getDisplayMode(), and a
@@ -103,18 +110,86 @@ public class Display {
      * @throws LWJGLException
      */
     public static void create(PixelFormat pixel_format, Drawable shared_drawable) {
-        System.out.println("TODO: Implement Display.create(PixelFormat, Drawable)"); // TODO
+        hasPixelFormat = true;
+        attachmentPixelFormat = pixel_format;
+        hasDrawable = true;
+        attachmentDrawable = shared_drawable;
+        System.out.println("[LWJGLXX] TODO: Implement Display.create(PixelFormat, Drawable)"); // TODO
         create();
     }
 
     public static void create(PixelFormat pixel_format, ContextAttribs attribs) {
-        System.out.println("TODO: Implement Display.create(PixelFormat, ContextAttribs)"); // TODO
+        hasPixelFormat = true;
+        attachmentPixelFormat = pixel_format;
+        hasContextAttribs = true;
+        attachmentContextAttribs = attribs;
+        System.out.println("[LWJGLXX] TODO: Implement Display.create(PixelFormat, ContextAttribs)"); // TODO
         create();
     }
 
     public static void create(PixelFormat pixel_format) {
-        System.out.println("TODO: Implement Display.create(PixelFormat)"); // TODO
+        hasPixelFormat = true;
+        attachmentPixelFormat = pixel_format;
         create();
+    }
+
+    private static void processAttachments() {
+        if (hasPixelFormat) {
+            // bpp
+            if (attachmentPixelFormat.getBitsPerPixel() > 0) {
+                int perChannel = attachmentPixelFormat.getBitsPerPixel() / 3;
+                glfwWindowHint(GLFW_RED_BITS, perChannel);
+                glfwWindowHint(GLFW_GREEN_BITS, perChannel);
+                glfwWindowHint(GLFW_BLUE_BITS, perChannel);
+            }
+
+            // alpha
+            glfwWindowHint(GLFW_ALPHA_BITS, attachmentPixelFormat.getAlphaBits());
+
+            // depth
+            glfwWindowHint(GLFW_DEPTH_BITS, attachmentPixelFormat.getDepthBits());
+
+            // stencil
+            glfwWindowHint(GLFW_STENCIL_BITS, attachmentPixelFormat.getStencilBits());
+
+            // anti-aliasing samples
+            glfwWindowHint(GLFW_SAMPLES, attachmentPixelFormat.getSamples());
+
+            // colorSamples - ignored
+
+            // num_aux_buffers - ignored
+
+            // accum_bpp
+            if (attachmentPixelFormat.getAccumulationBitsPerPixel() > 0) {
+                int perChannel = attachmentPixelFormat.getAccumulationBitsPerPixel() / 3;
+                glfwWindowHint(GLFW_ACCUM_RED_BITS, perChannel);
+                glfwWindowHint(GLFW_ACCUM_GREEN_BITS, perChannel);
+                glfwWindowHint(GLFW_ACCUM_BLUE_BITS, perChannel);
+            }
+
+            // accum_alpha
+            if (attachmentPixelFormat.getAccumulationAlpha() > 0) {
+                glfwWindowHint(GLFW_ACCUM_ALPHA_BITS, attachmentPixelFormat.getAccumulationAlpha());
+            }
+
+            // stereo
+            if (attachmentPixelFormat.isStereo()) {
+                glfwWindowHint(GLFW_STEREO, GLFW_TRUE);
+            }
+
+            // floating_point, floating_point_packed - ignored
+
+            // sRGB
+            if (attachmentPixelFormat.isSRGB()) {
+                glfwWindowHint(GLFW_SRGB_CAPABLE, GLFW_TRUE);
+            }
+        }
+        if (hasContextAttribs) {
+
+        }
+        if (hasDrawable) {
+
+        }
     }
 
     public static void create() {
@@ -163,6 +238,9 @@ public class Display {
         // try OpenGL versions one by one to find the best fit one
         while (true) {
             glfwDefaultWindowHints();
+
+            processAttachments();
+
             glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
             glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
             glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, versionMajor);
@@ -464,7 +542,7 @@ public class Display {
             }
         }
 
-        System.out.println("[LWJGLXX] Current OpenGL version is " + versionMajor + "." + versionMinor);
+        System.out.println("[LWJGLXX] Current OpenGL version is " + ForgeEarlyConfig.OPENGL_VERSION_MAJOR + "." + ForgeEarlyConfig.OPENGL_VERSION_MINOR);
 
         ConfigManager.sync(ForgeEarlyConfig.class);
         System.out.println("[LWJGLXX] Cached current OpenGL version to forge_early.cfg");
