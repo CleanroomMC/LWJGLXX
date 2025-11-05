@@ -15,9 +15,13 @@
  */
 package org.lwjglx.input;
 
+import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
+import org.lwjgl.glfw.GLFW;
+import org.lwjgl.glfw.GLFWImage;
 import org.lwjglx.LWJGLException;
+import org.lwjglx.lwjgl3ify.BufferCasts;
 
 /**
  *
@@ -44,6 +48,8 @@ public class Cursor {
     private int index;
 
     private boolean destroyed;
+    
+    private final long addr;
 
     /**
      * Constructs a new Cursor, with the given parameters. Mouse must have been created before you can create Cursor
@@ -62,7 +68,7 @@ public class Cursor {
      */
     public Cursor(int width, int height, int xHotspot, int yHotspot, int numImages, IntBuffer images, IntBuffer delays)
             throws LWJGLException {
-        // TODO
+        addr = GLFW.glfwCreateCursor(new GLFWImage(BufferCasts.toByteBuffer(images)), xHotspot, yHotspot);
         cursors = null;
     }
 
@@ -210,6 +216,10 @@ public class Cursor {
     protected void nextCursor() {
         checkValid();
         index = ++index % cursors.length;
+    }
+    
+    public long getNativeCursor() {
+        return addr;
     }
 
     /**
