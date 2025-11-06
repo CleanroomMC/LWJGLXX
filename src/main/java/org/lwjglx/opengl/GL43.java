@@ -298,9 +298,9 @@ public class GL43 {
     }
 
     public static void glDebugMessageCallback(KHRDebugCallback callback) {
-        long userParam = callback == null ? 0 : CallbackUtil.createGlobalRef(callback.getHandler());
-        CallbackUtil.registerContextCallbackKHR(userParam);
-        org.lwjgl.opengl.GL43.nglDebugMessageCallback(callback == null ? 0 : callback.getPointer(), userParam);
+        org.lwjgl.opengl.GL43.glDebugMessageCallback((source, type, id, severity, length, message, userParam) -> {
+            callback.getHandler().handleMessage(source, type, id, severity, org.lwjgl.opengl.GLDebugMessageCallback.getMessage(length, message));
+        }, 0);
     }
 
     public static void glDebugMessageControl(int source, int type, int severity, java.nio.IntBuffer ids,
