@@ -299,4 +299,15 @@ public class KeyCodes {
             default -> GLFW.GLFW_KEY_UNKNOWN;
         };
     }
+    
+    public static char glfwToASCII(int key) {
+        return switch (key) {
+            case GLFW.GLFW_KEY_ESCAPE -> '\33';
+            case GLFW.GLFW_KEY_TAB -> '\t';
+            case GLFW.GLFW_KEY_ENTER -> '\15';
+            case GLFW.GLFW_KEY_BACKSPACE -> '\b';
+            case GLFW.GLFW_KEY_DELETE -> '\177';
+            default -> '\0';
+        };
+    }
 }
