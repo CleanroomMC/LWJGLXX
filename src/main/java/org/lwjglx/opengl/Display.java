@@ -373,7 +373,7 @@ public class Display {
                         Keyboard.addGlfwKeyEvent(window, key, scancode, action, mods, '\0');
                     }
                 } else { // Other key with no char associated
-                    Keyboard.addGlfwKeyEvent(window, key, scancode, action, mods, '\0');
+                    Keyboard.addGlfwKeyEvent(window, key, scancode, action, mods, ' ');
                 }
             }
         };
