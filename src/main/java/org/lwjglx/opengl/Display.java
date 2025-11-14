@@ -287,7 +287,6 @@ public class Display {
 
             System.out.println("[LWJGLXX] Attempting to create OpenGL " + versionMajor + "." + versionMinor + " context");
             Window.handle = glfwCreateWindow(mode.getWidth(), mode.getHeight(), windowTitle, NULL, NULL);
-            GLFW.glfwSetInputMode(Window.handle, GLFW_CURSOR, GLFW_CURSOR_NORMAL);
             // GL21 is the last version to try
             if (Window.handle == 0L && versionMajor == 2 && versionMinor == 1) {
                 System.out.println("[LWJGLXX] Failed to get OpenGL " + versionMajor + "." + versionMinor + " window handle");
