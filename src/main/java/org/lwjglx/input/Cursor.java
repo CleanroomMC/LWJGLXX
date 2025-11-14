@@ -16,6 +16,7 @@
 package org.lwjglx.input;
 
 import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.IntBuffer;
 
 import org.lwjgl.glfw.GLFW;
@@ -69,11 +70,19 @@ public class Cursor {
      */
     public Cursor(int width, int height, int xHotspot, int yHotspot, int numImages, IntBuffer images, IntBuffer delays)
             throws LWJGLException {
-        ByteBuffer bb = BufferUtils.createByteBuffer(images.remaining() * 4);
-        bb.asIntBuffer().put(images);
+        int[] fixed = new int[images.remaining()], array = new int[images.remaining()];
+        int i = 0;
+        while (images.remaining() > 0) {
+            array[i++] = images.get();
+        }
+        for (i = 0; i < array.length; i++) {
+            fixed[i] = array[width * (height - i / width - 1) + i % width];
+        }
+        ByteBuffer bb = BufferUtils.createByteBuffer(images.capacity() * 4);
+        bb.asIntBuffer().put(fixed);
         GLFWImage image = new GLFWImage(BufferUtils.createByteBuffer(GLFWImage.SIZEOF));
         image.set(width, height, bb);
-        addr = GLFW.glfwCreateCursor(image, xHotspot, yHotspot);
+        addr = GLFW.glfwCreateCursor(image, xHotspot, height - yHotspot);
         
         cursors = null;
     }
