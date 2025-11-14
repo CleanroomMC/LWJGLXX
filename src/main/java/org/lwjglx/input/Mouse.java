@@ -47,6 +47,8 @@ public class Mouse {
     private static boolean clipPostionToDisplay = true;
     private static int ignoreNextDelta = 0;
     private static int ignoreNextMove = 0;
+    
+    private static Cursor currentCursor = null;
 
     public static void addMoveEvent(double mouseX, double mouseY) {
         if (ignoreNextMove > 0) {
@@ -285,8 +287,8 @@ public class Mouse {
         }
         // convert back from framebuffer coordinates to screen-space coordinates
         float inv_scale = 1.0f / Display.getPixelScaleFactor();
-        new_x *= inv_scale;
-        new_y *= inv_scale;
+        new_x *= (int) inv_scale;
+        new_y *= (int) inv_scale;
         GLFW.glfwSetCursorPos(Display.getWindow(), new_x, new_y);
         // this might lose accuracy, since we just went from fb->screen and this will
         // undo that change. Yay floating point numbers!
@@ -294,8 +296,9 @@ public class Mouse {
     }
 
     public static Cursor setNativeCursor(Cursor cursor) throws LWJGLException {
-        // no-op
-        return null;
+        GLFW.glfwSetCursor(Display.getWindow(), cursor.getNativeCursor());
+        currentCursor = cursor;
+        return cursor;
     }
 
     public static void destroy() {}
@@ -313,7 +316,7 @@ public class Mouse {
     }
 
     public static Cursor getNativeCursor() {
-        return null;
+        return currentCursor;
     }
 
     public static boolean hasWheel() {
