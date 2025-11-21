@@ -8,6 +8,7 @@ import net.minecraftforge.common.ForgeEarlyConfig;
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
+import org.lwjgl.system.MemoryUtil;
 import org.lwjglx.LWJGLException;
 import org.lwjglx.Sys;
 import org.lwjglx.opengl.Display;
@@ -244,7 +245,7 @@ public class Mouse {
     }
 
     public static int getEventDWheel() {
-        return wheelEvents[queue.getCurrentPos()] * 120;
+        return wheelEvents[queue.getCurrentPos()];
     }
 
     public static int getX() {
@@ -270,7 +271,7 @@ public class Mouse {
     public static int getDWheel() {
         int value = dwheel;
         dwheel = 0;
-        return value * 120;
+        return value;
     }
 
     public static int getButtonCount() {
@@ -296,7 +297,7 @@ public class Mouse {
     }
 
     public static Cursor setNativeCursor(Cursor cursor) throws LWJGLException {
-        GLFW.glfwSetCursor(Display.getWindow(), cursor.getNativeCursor());
+        GLFW.glfwSetCursor(Display.getWindow(), cursor != null ? cursor.getNativeCursor() : MemoryUtil.NULL);
         currentCursor = cursor;
         return cursor;
     }
