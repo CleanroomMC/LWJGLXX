@@ -34,7 +34,7 @@ ext {
     // Do not change the order unless it is required so
     lwjglLibraries = [
             [
-                    'lwjgl-glfw', 'lwjgl-jemalloc', 'lwjgl-openal',
+                    'lwjgl-glfw', 'lwjgl-jemalloc', 'lwjgl-openal', 'lwjgl-sdl',
                     'lwjgl-opengl', 'lwjgl-stb', 'lwjgl-tinyfd', 'lwjgl'
             ]
     ]
@@ -42,7 +42,7 @@ ext {
 
 dependencies {
     lwjglLibraries[0].each {
-        compileOnly "org.lwjgl:$it:3.3.6"
+        compileOnly "org.lwjgl:$it:3.4.1"
     }
     compileOnly 'org.apache.commons:commons-lang3:3.19.0'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
