@@ -62,6 +62,7 @@ jar {
     exclude("net/**")
     manifest {
         attributes([
+                'Lwjgl3-Aware' : true,
                 'Specification-Title': mod_id,
                 'Specification-Vendor': mod_authors,
                 'Specification-Version': '1', // We are version 1 of ourselves
