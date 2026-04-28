@@ -15,15 +15,17 @@
  */
 package org.lwjglx.input;
 
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
+import static org.lwjgl.sdl.SDLMouse.*;
+import static org.lwjgl.sdl.SDLPixels.*;
+import static org.lwjgl.sdl.SDLSurface.*;
+
 import java.nio.IntBuffer;
 
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.glfw.GLFWImage;
-import org.lwjglx.BufferUtils;
-import org.lwjglx.LWJGLException;
-import org.lwjglx.lwjgl3ify.BufferCasts;
+import org.lwjgl.sdl.SDL_Surface;
+import org.lwjgl.system.MemoryStack;
+import org.lwjglx.Sys;
+import top.outlands.foundation.boot.MainThreadExec;
+
 
 /**
  *
@@ -44,14 +46,15 @@ public class Cursor {
     public static final int CURSOR_ANIMATION = 4;
 
     /** First element to display */
-    private final CursorElement[] cursors;
+    private final CursorElement[] cursors = null;
 
     /** Index into list of cursors */
     private int index;
 
     private boolean destroyed;
-    
-    private final long addr;
+
+    private long sdlCursor;
+    private SDL_Surface sdlSurface;
 
     /**
      * Constructs a new Cursor, with the given parameters. Mouse must have been created before you can create Cursor
@@ -66,25 +69,32 @@ public class Cursor {
      * @param numImages number of cursor images specified. Must be 1 if animations are not supported.
      * @param images    A buffer containing the images. The origin is at the lower left corner, like OpenGL.
      * @param delays    An int buffer of animation frame delays, if numImages is greater than 1, else null
-     * @throws LWJGLException if the cursor could not be created for any reason
      */
-    public Cursor(int width, int height, int xHotspot, int yHotspot, int numImages, IntBuffer images, IntBuffer delays)
-            throws LWJGLException {
-        int[] fixed = new int[images.remaining()], array = new int[images.remaining()];
-        int i = 0;
-        while (images.remaining() > 0) {
-            array[i++] = images.get();
+    public Cursor(int width, int height, int xHotspot, int yHotspot, int numImages, IntBuffer images,
+                  IntBuffer delays) {
+        final int pixels = width * height;
+        if (numImages < 1) {
+            throw new IllegalArgumentException("There must be at least 1 cursor image");
         }
-        for (i = 0; i < array.length; i++) {
-            fixed[i] = array[width * (height - i / width - 1) + i % width];
+        if (images.remaining() < pixels) {
+            throw new IllegalArgumentException("Not enough pixels in the cursor image");
         }
-        ByteBuffer bb = BufferUtils.createByteBuffer(images.capacity() * 4);
-        bb.asIntBuffer().put(fixed);
-        GLFWImage image = new GLFWImage(BufferUtils.createByteBuffer(GLFWImage.SIZEOF));
-        image.set(width, height, bb);
-        addr = GLFW.glfwCreateCursor(image, xHotspot, height - yHotspot);
-        
-        cursors = null;
+        try (MemoryStack stack = MemoryStack.stackPush()) {
+            sdlSurface = Sys.checkSdl(SDL_CreateSurface(width, height, SDL_PIXELFORMAT_BGRA32));
+            Sys.checkSdl(SDL_LockSurface(sdlSurface));
+            final IntBuffer targetInts = sdlSurface.pixels()
+                .asIntBuffer();
+            for (int i = 0; i < pixels; i++) {
+                targetInts.put(i, images.get(i));
+            }
+            SDL_UnlockSurface(sdlSurface);
+            SDL_FlipSurface(sdlSurface, SDL_FLIP_VERTICAL);
+            sdlCursor = Sys.checkSdl(
+                SDL_CreateColorCursor(
+                    sdlSurface,
+                    Math.clamp(xHotspot, 0, width - 1),
+                    Math.clamp(height - 1 - yHotspot, 0, height - 1)));
+        }
     }
 
     /**
@@ -94,8 +104,7 @@ public class Cursor {
      * @return the maximum size of a native cursor
      */
     public static int getMinCursorSize() {
-        // TODO
-        return 0;
+        return 8;
     }
 
     /**
@@ -105,8 +114,7 @@ public class Cursor {
      * @return the maximum size of a native cursor
      */
     public static int getMaxCursorSize() {
-        // TODO
-        return 0;
+        return 64;
     }
 
     /**
@@ -117,74 +125,7 @@ public class Cursor {
      * @return A bit mask with native cursor capabilities.
      */
     public static int getCapabilities() {
-        // TODO
-        return 0;
-    }
-
-    /**
-     * Creates the actual cursor, using a platform specific class
-     */
-    private static CursorElement[] createCursors(int width, int height, int xHotspot, int yHotspot, int numImages,
-            IntBuffer images, IntBuffer delays) throws LWJGLException {
-        // TODO
-        return null;
-    }
-
-    /**
-     * Convert an IntBuffer image of ARGB format into ABGR
-     *
-     * @param imageBuffer image to convert
-     */
-    private static void convertARGBtoABGR(IntBuffer imageBuffer) {
-        for (int i = 0; i < imageBuffer.limit(); i++) {
-            int argbColor = imageBuffer.get(i);
-
-            byte alpha = (byte) (argbColor >>> 24);
-            byte blue = (byte) (argbColor >>> 16);
-            byte green = (byte) (argbColor >>> 8);
-            byte red = (byte) argbColor;
-
-            int abgrColor = ((alpha & 0xff) << 24) + ((red & 0xff) << 16) + ((green & 0xff) << 8) + ((blue & 0xff));
-
-            imageBuffer.put(i, abgrColor);
-        }
-    }
-
-    /**
-     * Flips the images so they're oriented according to opengl
-     *
-     * @param width       Width of image
-     * @param height      Height of images
-     * @param numImages   How many images to flip
-     * @param images      Source images
-     * @param images_copy Destination images
-     */
-    private static void flipImages(int width, int height, int numImages, IntBuffer images, IntBuffer images_copy) {
-        for (int i = 0; i < numImages; i++) {
-            int start_index = i * width * height;
-            flipImage(width, height, start_index, images, images_copy);
-        }
-    }
-
-    /**
-     * @param width       Width of image
-     * @param height      Height of images
-     * @param start_index index into source buffer to copy to
-     * @param images      Source images
-     * @param images_copy Destination images
-     */
-    private static void flipImage(int width, int height, int start_index, IntBuffer images, IntBuffer images_copy) {
-        for (int y = 0; y < height >> 1; y++) {
-            int index_y_1 = y * width + start_index;
-            int index_y_2 = (height - y - 1) * width + start_index;
-            for (int x = 0; x < width; x++) {
-                int index1 = index_y_1 + x;
-                int index2 = index_y_2 + x;
-                int temp_pixel = images.get(index1 + images.position());
-                images_copy.put(index1, images.get(index2 + images.position()));
-                images_copy.put(index2, temp_pixel);
-            }
-        }
+        return CURSOR_ONE_BIT_TRANSPARENCY | CURSOR_8_BIT_ALPHA;
     }
 
     /**
@@ -204,7 +145,17 @@ public class Cursor {
      * cursor)
      */
     public void destroy() {
-        // TODO
+        if (Mouse.getNativeCursor() == this) {
+            Mouse.setNativeCursor(null);
+        }
+        if (sdlCursor != 0) {
+            SDL_DestroyCursor(sdlCursor);
+            sdlCursor = 0;
+        }
+        if (sdlSurface != null) {
+            SDL_DestroySurface(sdlSurface);
+            sdlSurface = null;
+        }
     }
 
     /**
@@ -217,7 +168,7 @@ public class Cursor {
 
     /**
      * Determines whether this cursor has timed out
-     * 
+     *
      * @return true if the this cursor has timed out, false if not
      */
     protected boolean hasTimedOut() {
@@ -231,10 +182,6 @@ public class Cursor {
     protected void nextCursor() {
         checkValid();
         index = ++index % cursors.length;
-    }
-    
-    public long getNativeCursor() {
-        return addr;
     }
 
     /**
@@ -256,5 +203,12 @@ public class Cursor {
             this.delay = delay;
             this.timeout = timeout;
         }
+    }
+
+    void sdlSet() {
+        if (sdlCursor == 0) {
+            return;
+        }
+        MainThreadExec.runOnMainThread(() -> SDL_SetCursor(sdlCursor));
     }
 }

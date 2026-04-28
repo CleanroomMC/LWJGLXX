@@ -46,6 +46,17 @@ public class ForgeEarlyConfig {
     public static String X11_CLASS_NAME = "minecraft";
 
     public static String COCOA_FRAME_NAME = "minecraft";
+    
+    public static String APP_ID = "com.cleanroommc.cleanroom";
+    public static boolean DEBUG_PRINT_KEY_EVENTS = false;
+    public static boolean DEBUG_PRINT_MOUSE_EVENTS = false;
+    public static boolean DEBUG_REGISTER_OPENGL_LOGGER = false;
+    public static boolean WINDOW_HIDPI_RENDERING = true;
+    public static boolean WINDOW_LOADING_PROGRESS = true;
+    public static boolean INPUT_ALWAYS_REPEAT_KEYS = false;
+    public static boolean FORCE_DISCRETE_SCROLLING = false;
+    public static boolean DEBUG_PRINT_WINDOW_EVENTS = false;
+    
     public static boolean COCOA_RETINA_FRAMEBUFFER = false;
 
     public static String CONFIG_ANY_TIME_VERSION = "3.0";

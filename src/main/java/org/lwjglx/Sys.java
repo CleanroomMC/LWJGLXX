@@ -1,41 +1,96 @@
 package org.lwjglx;
 
-import static org.lwjgl.glfw.GLFW.glfwInit;
+import static org.lwjgl.sdl.SDLHints.*;
+import static org.lwjgl.sdl.SDLInit.*;
+import static org.lwjgl.sdl.SDLMessageBox.*;
+import static org.lwjgl.sdl.SDLStdinc.*;
+import static org.lwjgl.sdl.SDLTimer.*;
+import static org.lwjgl.system.MemoryUtil.NULL;
 
-import java.awt.*;
-import java.net.URI;
-import java.util.Objects;
-
-import javax.swing.JOptionPane;
-import javax.swing.UIManager;
+import java.awt.GraphicsEnvironment;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import net.minecraftforge.common.ForgeEarlyConfig;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.lwjgl.Version;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.system.*;
+import org.lwjgl.sdl.SDLClipboard;
+import org.lwjgl.sdl.SDLMisc;
+import org.lwjgl.system.Configuration;
+import org.lwjgl.system.MemoryUtil;
+import org.lwjgl.system.Platform;
+import org.lwjgl.system.Pointer;
+import top.outlands.foundation.boot.MainThreadExec;
 import org.lwjglx.opengl.Display;
 
 public class Sys {
 
-    static {
+    static private void firstTimeInit() {
+        Configuration.OPENGL_EXPLICIT_INIT.set(true);
+        Configuration.HARFBUZZ_LIBRARY_NAME.set("freetype");
         if (Platform.get() == Platform.MACOSX) {
-            Configuration.GLFW_CHECK_THREAD0.set(false);
-            Configuration.GLFW_LIBRARY_NAME.set("glfw_async");
-            Toolkit.getDefaultToolkit();
-        }
-        if (Objects.requireNonNullElse(System.getenv("XDG_SESSION_TYPE"),"").toLowerCase().startsWith("wayland")) {
-            if (!ForgeEarlyConfig.FORCE_WAYLAND) {
-                GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_X11);
-            } else {
-                GLFW.glfwInitHint(GLFW.GLFW_PLATFORM, GLFW.GLFW_PLATFORM_WAYLAND);
+            if (!GraphicsEnvironment.isHeadless()) {
+                throw new IllegalStateException(
+                    "java.awt.headless must be set to true on macOS!");
             }
         }
-        if (!glfwInit()) {
-            throw new IllegalStateException("Unable to initialize glfw");
-        }
+        MainThreadExec.ensureInitialised();
+        MainThreadExec.runOnMainThread(() -> {
+            SDL_SetMemoryFunctions(
+                MemoryUtil::nmemAllocChecked,
+                MemoryUtil::nmemCallocChecked,
+                MemoryUtil::nmemReallocChecked,
+                MemoryUtil::nmemFree);
+            checkSdl(SDL_SetAppMetadata("Cleanroom Minecraft", "1.12.2", ForgeEarlyConfig.APP_ID));
+            checkSdl(
+                SDL_SetAppMetadataProperty(
+                    SDL_PROP_APP_METADATA_URL_STRING,
+                    "https://github.com/GTNewHorizons/lwjgl3ify"));
+            checkSdl(SDL_SetAppMetadataProperty(SDL_PROP_APP_METADATA_CREATOR_STRING, "Mojang"));
+            checkSdl(
+                SDL_SetAppMetadataProperty(
+                    SDL_PROP_APP_METADATA_COPYRIGHT_STRING,
+                    "https://www.minecraft.net/en-us/eula"));
+            checkSdl(SDL_SetAppMetadataProperty(SDL_PROP_APP_METADATA_TYPE_STRING, "game"));
+
+            Platform currentPlatform = Platform.get();
+
+            if (currentPlatform == Platform.LINUX) {
+                SDL_SetHint(SDL_HINT_VIDEO_FORCE_EGL, "1");
+            }
+
+            if (!SDL_Init(
+                SDL_INIT_VIDEO | SDL_INIT_EVENTS
+                    | SDL_INIT_JOYSTICK
+                    | SDL_INIT_GAMEPAD
+                    | SDL_INIT_HAPTIC
+                    | SDL_INIT_SENSOR)) {
+                throw new SDLException("Could not initialize SDL.");
+            }
+            // Platform-specific tricks
+            switch (currentPlatform) {
+                case MACOSX -> {
+                    SDL_SetHint(SDL_HINT_MAC_OPENGL_ASYNC_DISPATCH, "1");
+                }
+                case LINUX -> {
+                    // This is buggy on NVIDIA and crashes on secondary context creation on Wayland
+                    SDL_setenv_unsafe("__GL_THREADED_OPTIMIZATIONS", "0", 1);
+                }
+                default -> {}
+            }
+            SDL_SetHint(SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
+        });
     }
 
-    public static void initialize() {}
+    private static final AtomicBoolean isFirstInit = new AtomicBoolean(true);
+
+    public static void initialize() {
+        if (!isFirstInit.compareAndSet(true, false)) {
+            return;
+        } else {
+            firstTimeInit();
+        }
+    }
 
     /** Returns the LWJGL version. */
     public static String getVersion() {
@@ -49,7 +104,7 @@ public class Sys {
      * @return timer resolution in ticks per second or 0 if no timer is present.
      */
     public static long getTimerResolution() {
-        return 1000;
+        return 1_000;
     }
 
     /**
@@ -58,44 +113,59 @@ public class Sys {
      * <p>
      * <strong>NOTEZ BIEN</strong> that the hires timer WILL wrap around.
      *
+     * Note: LWJGL2 always returned milliseconds here, so we do the same.
+     *
      * @return the current hires time, in ticks (always >= 0)
      */
     public static long getTime() {
-        return (long) (GLFW.glfwGetTime() * 1000);
+        return SDL_GetTicksNS() / 1_000_000;
     }
 
     public static long getNanoTime() {
-        return (long) (GLFW.glfwGetTime() * (1000L * 1000L * 1000L));
+        return SDL_GetTicksNS();
     }
 
     public static boolean openURL(String url) {
-        if (!Desktop.isDesktopSupported()) return false;
-
-        Desktop desktop = Desktop.getDesktop();
-        if (!desktop.isSupported(Desktop.Action.BROWSE)) return false;
-
-        try {
-            desktop.browse(new URI(url));
-            return true;
-        } catch (Exception ex) {
-            return false;
-        }
+        return MainThreadExec.runOnMainThread(() -> SDLMisc.SDL_OpenURL(url));
     }
 
     public static void alert(String title, String message) {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception e) {
-            LWJGLUtil.log("Caught exception while setting LAF: " + e);
-        }
-        JOptionPane.showMessageDialog(null, message, title, JOptionPane.WARNING_MESSAGE);
+        MainThreadExec.runOnMainThread(
+            () -> { SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_WARNING, title, message, Display.getWindow()); });
     }
 
     public static boolean is64Bit() {
-        return Platform.getArchitecture().toString().endsWith("64");
+        return Pointer.BITS64;
     }
 
     public static String getClipboard() {
-        return GLFW.glfwGetClipboardString(Display.getWindow());
+        return MainThreadExec.runOnMainThread(SDLClipboard::SDL_GetClipboardText);
+    }
+
+    public static void checkSdl(boolean result) {
+        if (!result) {
+            throw new SDLException();
+        }
+    }
+
+    public static <T> @NotNull T checkSdl(@Nullable T result) {
+        if (result == null) {
+            throw new SDLException();
+        }
+        return result;
+    }
+
+    public static int checkSdl(int result) {
+        if (result == NULL) {
+            throw new SDLException();
+        }
+        return result;
+    }
+
+    public static long checkSdl(long result) {
+        if (result == NULL) {
+            throw new SDLException();
+        }
+        return result;
     }
 }

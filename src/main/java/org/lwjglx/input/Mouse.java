@@ -1,16 +1,18 @@
 package org.lwjglx.input;
 
+import static org.lwjgl.sdl.SDLMouse.*;
+
 import java.nio.ByteBuffer;
 import java.nio.IntBuffer;
 
 import net.minecraftforge.common.ForgeEarlyConfig;
-
 import org.apache.commons.lang3.StringUtils;
 import org.lwjgl.BufferUtils;
-import org.lwjgl.glfw.GLFW;
-import org.lwjgl.system.MemoryUtil;
-import org.lwjglx.LWJGLException;
+import org.lwjgl.sdl.SDLVideo;
+import org.lwjgl.sdl.SDL_MouseMotionEvent;
+import org.lwjgl.system.MemoryStack;
 import org.lwjglx.Sys;
+import top.outlands.foundation.boot.MainThreadExec;
 import org.lwjglx.opengl.Display;
 
 public class Mouse {
@@ -33,8 +35,11 @@ public class Mouse {
     private static int y = 0;
 
     private static int dx = 0, dy = 0, dwheel = 0;
+    private static float dxFloat = 0, dyFloat = 0;
 
-    private static EventQueue queue = new EventQueue(512);
+    private static EventQueue queue = new EventQueue(128);
+
+    public static volatile int sdlMouseButtonFlags = 0;
 
     private static int[] buttonEvents = new int[queue.getMaxEvents()];
     private static boolean[] buttonEventStates = new boolean[queue.getMaxEvents()];
@@ -48,19 +53,50 @@ public class Mouse {
     private static boolean clipPostionToDisplay = true;
     private static int ignoreNextDelta = 0;
     private static int ignoreNextMove = 0;
-    
-    private static Cursor currentCursor = null;
 
-    public static void addMoveEvent(double mouseX, double mouseY) {
+    public static int sdlToLwjglMouseButton(byte sdlMouseButton) {
+        return switch (sdlMouseButton) {
+            case SDL_BUTTON_LEFT -> 0;
+            case SDL_BUTTON_RIGHT -> 1;
+            case SDL_BUTTON_MIDDLE -> 2;
+            case SDL_BUTTON_X1 -> 3;
+            case SDL_BUTTON_X2 -> 4;
+            default -> sdlMouseButton;
+        };
+    }
+
+    public static byte lwjglToSdlMouseButton(int lwjglMouseButton) {
+        return switch (lwjglMouseButton) {
+            case 0 -> SDL_BUTTON_LEFT;
+            case 1 -> SDL_BUTTON_RIGHT;
+            case 2 -> SDL_BUTTON_MIDDLE;
+            case 3 -> SDL_BUTTON_X1;
+            case 4 -> SDL_BUTTON_X2;
+            default -> (byte) lwjglMouseButton;
+        };
+    }
+
+    // Accumulate small floating-point movements
+    static float dxAccum = 0.0f, dyAccum = 0.0f;
+
+    public static void addMoveEvent(SDL_MouseMotionEvent event) {
         if (ignoreNextMove > 0) {
             ignoreNextMove--;
             return;
         }
         float scale = Display.getPixelScaleFactor();
-        mouseX *= scale;
-        mouseY *= scale;
-        dx += (int) mouseX - latestX;
-        dy += Display.getHeight() - (int) mouseY - latestY;
+        final float mouseX = event.x() * scale;
+        final float mouseY = event.y() * scale;
+        // convert from screen-space coordinates to framebuffer coordinates
+        dxFloat += event.xrel() * scale;
+        dyFloat -= event.yrel() * scale;
+        dxAccum += event.xrel() * scale;
+        dyAccum -= event.yrel() * scale;
+        final int wholeDx = Math.round(dxAccum), wholeDy = Math.round(dyAccum);
+        dxAccum -= wholeDx;
+        dyAccum -= wholeDy;
+        dx += wholeDx;
+        dy += wholeDy;
         latestX = (int) mouseX;
         latestY = Display.getHeight() - (int) mouseY;
         if (ignoreNextDelta > 0) {
@@ -71,6 +107,10 @@ public class Mouse {
             lastEventY = latestY;
             dx = 0;
             dy = 0;
+            dxAccum = 0;
+            dyAccum = 0;
+            dxFloat = 0;
+            dyFloat = 0;
         }
 
         lastxEvents[queue.getNextPos()] = lastEventX;
@@ -119,6 +159,9 @@ public class Mouse {
             delta = -delta;
         }
         delta *= ForgeEarlyConfig.INPUT_SCROLL_SPEED;
+        if (ForgeEarlyConfig.FORCE_DISCRETE_SCROLLING) {
+            delta = Math.signum(delta);
+        }
 
         final int lastWheel = (int) fractionalWheelPosition;
         fractionalWheelPosition += delta;
@@ -127,10 +170,8 @@ public class Mouse {
         if (newWheel != lastWheel) {
             lastxEvents[queue.getNextPos()] = lastEventX;
             lastyEvents[queue.getNextPos()] = lastEventY;
-
             lastEventX = latestX;
             lastEventY = latestY;
-
             dwheel += newWheel - lastWheel;
 
             xEvents[queue.getNextPos()] = latestX;
@@ -149,6 +190,7 @@ public class Mouse {
     }
 
     public static void poll() {
+
         if (!grabbed && clipPostionToDisplay) {
             if (latestX < 0) latestX = 0;
             if (latestY < 0) latestY = 0;
@@ -160,7 +202,11 @@ public class Mouse {
         y = latestY;
     }
 
-    public static void create() throws LWJGLException {}
+    public static void create() {
+        if (currentCursor != null) {
+            setNativeCursor(currentCursor);
+        }
+    }
 
     public static boolean isCreated() {
         return Display.isCreated();
@@ -170,38 +216,27 @@ public class Mouse {
         if (grabbed == grab) {
             return;
         }
-        GLFW.glfwSetInputMode(
-            Display.getWindow(),
-            GLFW.GLFW_CURSOR,
-            grab ? GLFW.GLFW_CURSOR_DISABLED : GLFW.GLFW_CURSOR_NORMAL);
+        MainThreadExec.runOnMainThread(() -> {
+            try (final MemoryStack ms = MemoryStack.stackPush()) {
+                final IntBuffer w = ms.ints(0);
+                final IntBuffer h = ms.ints(0);
+                SDLVideo.SDL_GetWindowSize(Display.getWindow(), w, h);
+                if (!grab) {
+                    SDL_WarpMouseInWindow(Display.getWindow(), w.get(0) / 2.0f, h.get(0) / 2.0f);
+                }
+                SDL_SetWindowRelativeMouseMode(Display.getWindow(), grab);
+                if (!grab) {
+                    SDL_WarpMouseInWindow(Display.getWindow(), w.get(0) / 2.0f, h.get(0) / 2.0f);
+                }
+                dx = 0;
+                dy = 0;
+                dxAccum = 0;
+                dyAccum = 0;
+                dxFloat = 0;
+                dyFloat = 0;
+            }
+        });
         grabbed = grab;
-        if (!grab) {
-            // The old cursor position is sent instead of the new one in the events following mouse ungrab.
-            ignoreNextMove += 2;
-            setCursorPosition(Display.getWidth() / 2, Display.getHeight() / 2);
-            // Movement events are not properly sent when toggling mouse grab mode.
-            // Trick the game into getting the correct mouse position if no new events appear.
-            latestX = Display.getWidth() / 2;
-            latestY = Display.getHeight() / 2;
-            lastEventX = latestX;
-            lastEventY = latestY;
-            x = latestX;
-            y = latestY;
-
-            xEvents[queue.getNextPos()] = latestX;
-            yEvents[queue.getNextPos()] = latestY;
-            lastxEvents[queue.getNextPos()] = latestX;
-            lastyEvents[queue.getNextPos()] = latestY;
-            wheelEvents[queue.getNextPos()] = 0;
-            buttonEvents[queue.getNextPos()] = -1;
-            buttonEventStates[queue.getNextPos()] = false;
-            nanoTimeEvents[queue.getNextPos()] = Sys.getNanoTime();
-            queue.add();
-        } else {
-            ignoreNextDelta++; // Prevent camera rapidly rotating when closing GUIs.
-            dx = 0;
-            dy = 0;
-        }
     }
 
     public static boolean isGrabbed() {
@@ -209,7 +244,7 @@ public class Mouse {
     }
 
     public static boolean isButtonDown(int button) {
-        return GLFW.glfwGetMouseButton(Display.getWindow(), button) == GLFW.GLFW_PRESS;
+        return (sdlMouseButtonFlags & (1 << (lwjglToSdlMouseButton(button) - 1))) != 0;
     }
 
     public static boolean next() {
@@ -268,6 +303,18 @@ public class Mouse {
         return value;
     }
 
+    public static float getDXFloat() {
+        float value = dxFloat;
+        dxFloat = 0;
+        return value;
+    }
+
+    public static float getDYFloat() {
+        float value = dyFloat;
+        dyFloat = 0;
+        return value;
+    }
+
     public static int getDWheel() {
         int value = dwheel;
         dwheel = 0;
@@ -288,18 +335,34 @@ public class Mouse {
         }
         // convert back from framebuffer coordinates to screen-space coordinates
         float inv_scale = 1.0f / Display.getPixelScaleFactor();
-        new_x *= (int) inv_scale;
-        new_y *= (int) inv_scale;
-        GLFW.glfwSetCursorPos(Display.getWindow(), new_x, new_y);
-        // this might lose accuracy, since we just went from fb->screen and this will
-        // undo that change. Yay floating point numbers!
-        addMoveEvent(new_x, new_y);
+        MainThreadExec.runOnMainThread(
+            () -> { SDL_WarpMouseInWindow(Display.getWindow(), new_x * inv_scale, new_y * inv_scale); });
     }
 
-    public static Cursor setNativeCursor(Cursor cursor) throws LWJGLException {
-        GLFW.glfwSetCursor(Display.getWindow(), cursor != null ? cursor.getNativeCursor() : MemoryUtil.NULL);
+    private static Cursor currentCursor;
+    private static long systemCursor;
+
+    public static synchronized Cursor getNativeCursor() {
+        return currentCursor;
+    }
+
+    public static synchronized Cursor setNativeCursor(final Cursor cursor) {
+        final Cursor prevCursor = currentCursor;
         currentCursor = cursor;
-        return cursor;
+        if (!Display.isCreated()) {
+            return prevCursor;
+        }
+
+        if (cursor == null) {
+            if (systemCursor == 0) {
+                systemCursor = Sys.checkSdl(SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_DEFAULT));
+            }
+            MainThreadExec.runOnMainThread(() -> SDL_SetCursor(systemCursor));
+        } else {
+            cursor.sdlSet();
+        }
+
+        return prevCursor;
     }
 
     public static void destroy() {}
@@ -314,10 +377,6 @@ public class Mouse {
 
     public static String getButtonName(int button) {
         return "BUTTON" + button;
-    }
-
-    public static Cursor getNativeCursor() {
-        return currentCursor;
     }
 
     public static boolean hasWheel() {

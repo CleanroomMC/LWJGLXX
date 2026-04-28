@@ -16,7 +16,7 @@ base.archivesName = mod_id
 
 
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+java.toolchain.languageVersion = JavaLanguageVersion.of(25)
 
 
 repositories {
@@ -35,7 +35,7 @@ ext {
     lwjglLibraries = [
             [
                     'lwjgl-glfw', 'lwjgl-jemalloc', 'lwjgl-openal', 'lwjgl-sdl',
-                    'lwjgl-opengl', 'lwjgl-stb', 'lwjgl-tinyfd', 'lwjgl'
+                    'lwjgl-opengl', 'lwjgl-stb', 'lwjgl-tinyfd'//, 'lwjgl'
             ]
     ]
 }
@@ -44,6 +44,14 @@ dependencies {
     lwjglLibraries[0].each {
         compileOnly "org.lwjgl:$it:3.4.1"
     }
+    compileOnly 'org.lwjgl:lwjgl:3.4.1:unsafe'
+    compileOnly 'org.jetbrains:annotations:26.1.0'
+    compileOnly 'org.jspecify:jspecify:1.0.0'
+    compileOnly 'top.outlands:foundation:0.20.1'
+    compileOnly 'com.google.guava:guava:33.5.0-jre'
+    compileOnly 'org.apache.logging.log4j:log4j-api:2.25.4'
+    compileOnly 'org.apache.logging.log4j:log4j-core:2.25.4'
+    compileOnly 'it.unimi.dsi:fastutil:8.5.18'
     compileOnly 'org.apache.commons:commons-lang3:3.19.0'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
     compileOnly 'net.java.dev.jna:jna:5.18.1'

@@ -15,6 +15,8 @@
  */
 package org.lwjglx;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.system.Platform;
 
 import java.io.File;
@@ -41,6 +43,7 @@ public class LWJGLUtil {
     public static final String PLATFORM_LINUX_NAME = "linux";
     public static final String PLATFORM_MACOSX_NAME = "macosx";
     public static final String PLATFORM_WINDOWS_NAME = "windows";
+    public static final Logger LOGGER = LogManager.getLogger("LWJGLXX");
 
     private static final String LWJGL_ICON_DATA_16x16 = "\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377\377"
             + "\377\377\377\377\377\377\377\377\376\377\377\377\302\327\350\377"
@@ -356,7 +359,7 @@ public class LWJGLUtil {
         }
 
         // create needed string array
-        return possible_paths.toArray(new String[possible_paths.size()]);
+        return possible_paths.toArray(new String[0]);
     }
 
     private static String getPrivilegedProperty(final String property_name) {
@@ -376,13 +379,9 @@ public class LWJGLUtil {
         try {
             log("getPathFromClassLoader: searching for: " + libname);
             Class<?> c = classloader.getClass();
-            while (c != null) {
-                final Class<?> clazz = c;
-                Method findLibrary = clazz.getDeclaredMethod("findLibrary", String.class);
-                findLibrary.setAccessible(true);
-                String path = (String) findLibrary.invoke(classloader, libname);
-                return path;
-            }
+            Method findLibrary = c.getDeclaredMethod("findLibrary", String.class);
+            findLibrary.setAccessible(true);
+            return (String) findLibrary.invoke(classloader, libname);
         } catch (Exception e) {
             log("Failure locating " + e + " using classloader:" + e);
         }
@@ -426,7 +425,7 @@ public class LWJGLUtil {
      */
     public static void log(CharSequence msg) {
         if (DEBUG) {
-            System.err.println("[LWJGL] " + msg);
+            LOGGER.error(msg);
         }
     }
 

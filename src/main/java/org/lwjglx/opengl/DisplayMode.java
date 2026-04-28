@@ -83,7 +83,7 @@ public final class DisplayMode {
      * @see java.lang.Object#equals(Object)
      */
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof DisplayMode dm)) {
+        if (!(obj instanceof DisplayMode dm)) {
             return false;
         }
 
@@ -105,15 +105,6 @@ public final class DisplayMode {
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        StringBuilder sb = new StringBuilder(32);
-        sb.append(width);
-        sb.append(" x ");
-        sb.append(height);
-        sb.append(" x ");
-        sb.append(bpp);
-        sb.append(" @");
-        sb.append(freq);
-        sb.append("Hz");
-        return sb.toString();
+        return width + " x " + height + " x " + bpp + " @" + freq + "Hz";
     }
 }

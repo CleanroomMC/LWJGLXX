@@ -25,7 +25,7 @@ import org.lwjglx.LWJGLUtil;
  * @author elias_naur <elias_naur@users.sourceforge.net>
  * @version $Revision$ $Id$
  */
-abstract class PeerInfo {
+public abstract class PeerInfo {
 
     private final ByteBuffer handle;
     private Thread locking_thread; // Thread that has locked this PeerInfo
