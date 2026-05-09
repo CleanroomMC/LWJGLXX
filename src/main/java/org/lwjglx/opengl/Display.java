@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL;
 import org.lwjgl.opengl.GL11;
 import org.lwjglx.BufferUtils;
 import org.lwjglx.Sys;
-import oshi.SystemInfo;
+import oshi.ffm.SystemInfo;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
