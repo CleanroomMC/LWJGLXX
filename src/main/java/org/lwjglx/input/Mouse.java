@@ -288,8 +288,8 @@ public class Mouse {
         }
         // convert back from framebuffer coordinates to screen-space coordinates
         float inv_scale = 1.0f / Display.getPixelScaleFactor();
-        new_x *= (int) inv_scale;
-        new_y *= (int) inv_scale;
+        new_x = (int) (new_x * inv_scale);
+        new_y = (int) (new_y * inv_scale);
         GLFW.glfwSetCursorPos(Display.getWindow(), new_x, new_y);
         // this might lose accuracy, since we just went from fb->screen and this will
         // undo that change. Yay floating point numbers!
