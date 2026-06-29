@@ -42,14 +42,14 @@ ext {
 
 dependencies {
     lwjglLibraries[0].each {
-        compileOnly "org.lwjgl:$it:3.3.6"
+        compileOnly "org.lwjgl:$it:3.4.1"
     }
-    compileOnly 'org.apache.commons:commons-lang3:3.19.0'
+    compileOnly 'org.apache.commons:commons-lang3:3.20.0'
     compileOnly 'com.google.code.findbugs:jsr305:3.0.2'
-    compileOnly 'net.java.dev.jna:jna:5.18.1'
-    compileOnly 'net.java.dev.jna:jna-platform:5.18.1'
-    compileOnly 'com.github.oshi:oshi-core-ffm:7.0.1'
-    compileOnly 'com.github.oshi:oshi-common:7.0.1'
+    compileOnly 'net.java.dev.jna:jna:5.19.1'
+    compileOnly 'net.java.dev.jna:jna-platform:5.19.1'
+    compileOnly 'com.github.oshi:oshi-core-ffm:7.3.2'
+    compileOnly 'com.github.oshi:oshi-common:7.3.2'
 
 
 
