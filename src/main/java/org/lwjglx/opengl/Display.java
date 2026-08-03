@@ -3,6 +3,7 @@ package org.lwjglx.opengl;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.ForgeEarlyConfig;
 import net.minecraftforge.common.config.ConfigManager;
+import org.lwjgl.system.Platform;
 import org.lwjglx.LWJGLException;
 import org.lwjglx.input.*;
 import org.lwjglx.util.Rectangle;
@@ -358,7 +359,13 @@ public class Display {
                     }
 
 
-                    if ((GLFW_MOD_CONTROL & mods) != 0 && !ctrlGraphicalMode) { // Handle ctrl + x/c/v.
+                    if ((GLFW_MOD_SUPER & mods) != 0) {
+                        Keyboard.addGlfwKeyEvent(window, key, scancode, action, mods, (char) key);
+                        if (Platform.get() != Platform.MACOSX) {
+                            // MacOS doesn't send a char event for Cmd+KEY presses, but other platforms do.
+                            cancelNextChar = true;
+                        }
+                    } else if ((GLFW_MOD_CONTROL & mods) != 0 && !ctrlGraphicalMode) { // Handle ctrl + x/c/v.
                         Keyboard.addGlfwKeyEvent(window, key, scancode, action, mods, (char) (key & 0x1f));
                         cancelNextChar = true; // Cancel char event from ctrl key since its already handled here
                     } else if (action > 0) { // Delay press and repeat key event to actual char input. There is ALWAYS a
