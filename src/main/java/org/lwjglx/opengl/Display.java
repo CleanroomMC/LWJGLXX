@@ -327,6 +327,14 @@ public class Display {
                     } else if (key == GLFW_KEY_RIGHT_ALT) {
                         lastAltIsRightAlt = true;
                     }
+                } else if (action == GLFW_RELEASE) {
+                    // A pending delayed press/repeat for this key must be enqueued before the
+                    // release. Otherwise the char event can arrive after the release, flushing the
+                    // delayed event too late and re-marking the key as pressed (stuck movement keys).
+                    if (ingredientKeyEvent != null && ingredientKeyEvent.key == KeyCodes.toLwjglKey(key)) {
+                        Keyboard.addKeyEvent(ingredientKeyEvent);
+                        ingredientKeyEvent = null;
+                    }
                 }
                 if (key > GLFW_KEY_SPACE && key <= GLFW_KEY_GRAVE_ACCENT) { // Handle keys have a char. Exclude space to
                     // avoid extra input when switching IME
