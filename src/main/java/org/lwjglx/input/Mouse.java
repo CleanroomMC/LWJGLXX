@@ -120,10 +120,11 @@ public class Mouse {
         }
         delta *= ForgeEarlyConfig.INPUT_SCROLL_SPEED;
 
-        final int lastWheel = (int) fractionalWheelPosition;
+        // Round high-resolution substeps so direction changes do not lose a notch.
+        final int lastWheel = (int) Math.round(fractionalWheelPosition);
         fractionalWheelPosition += delta;
         totalScrollAmount += delta;
-        final int newWheel = (int) fractionalWheelPosition;
+        final int newWheel = (int) Math.round(fractionalWheelPosition);
         if (newWheel != lastWheel) {
             lastxEvents[queue.getNextPos()] = lastEventX;
             lastyEvents[queue.getNextPos()] = lastEventY;
@@ -145,7 +146,7 @@ public class Mouse {
 
             queue.add();
         }
-        fractionalWheelPosition = fractionalWheelPosition % 1;
+        fractionalWheelPosition -= newWheel;
     }
 
     public static void poll() {

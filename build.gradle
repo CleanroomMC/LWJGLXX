@@ -51,8 +51,14 @@ dependencies {
     compileOnly 'com.github.oshi:oshi-core-ffm:7.3.2'
     compileOnly 'com.github.oshi:oshi-common:7.3.2'
 
+    testImplementation 'org.junit.jupiter:junit-jupiter:6.0.3'
+    testImplementation 'org.assertj:assertj-core:3.27.7'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    testRuntimeOnly 'org.lwjgl:lwjgl:3.4.1'
+}
 
-
+test {
+    useJUnitPlatform()
 }
 
 tasks.withType(JavaCompile).configureEach {
